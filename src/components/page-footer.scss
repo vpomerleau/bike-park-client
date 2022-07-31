@@ -1,14 +1,14 @@
 .page-footer {
-    margin:0 auto;
-    max-width:100em;
-    justify-content: space-around;
-    color:white;
+  margin: 0 auto;
+  max-width: 80em;
+  justify-content: space-around;
+  color: white;
 
-    &__container {
-        display:flex;
-        flex-shrink:0;
-        padding:1rem 0;
-        background-color:black;
-        width:100vw;
-    }
+  &__container {
+    display: flex;
+    flex-shrink: 0;
+    padding: 1rem 0;
+    background-color: black;
+    width: 100vw;
+  }
 }

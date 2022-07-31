@@ -1,17 +1,16 @@
 .bikepark-features {
-    width:100vw;
-    display:flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    max-width:100em;
-    margin:0 auto;
+  width: 100vw;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  max-width: 80em;
+  margin: 0 auto;
 
-    &__grid {
-        max-width:100em;
-        flex-basis:100%;
-        display:grid;
-        grid-template-columns:1fr 1fr;
-        grid-template-rows:1fr 1fr;
-        gap:2rem;
-    }
+  &__grid {
+    flex-basis: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 2rem;
+  }
 }

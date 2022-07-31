@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useAuth0 } from "@auth0/auth0-react";
 import { NavLink } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
@@ -15,6 +16,7 @@ import Logout from "@mui/icons-material/Logout";
 import { LogoutButton } from "../../buttons/logout-button";
 
 export function AccountMenu() {
+  const { user } = useAuth0();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -34,7 +36,9 @@ export function AccountMenu() {
             aria-controls={open ? "account-menu" : undefined}
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}>
-            <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+            <Avatar src={user.picture} sx={{ width: 32, height: 32 }}>
+              ?
+            </Avatar>
           </IconButton>
         </Tooltip>
       </Box>
@@ -74,14 +78,11 @@ export function AccountMenu() {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}>
         <MenuItem>
-          <Avatar />{" "}
           <Link component={NavLink} to="/profile" exact underline="none">
-            Profile
+            My profile
           </Link>
         </MenuItem>
-        <MenuItem>
-          <Avatar /> My bookings
-        </MenuItem>
+        <MenuItem>My bookings</MenuItem>
         <Divider />
         {/* <MenuItem>
           <ListItemIcon>
