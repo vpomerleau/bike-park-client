@@ -1,0 +1,25 @@
+.nav-bar {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    max-width:100em;
+    margin:0 auto;
+
+    &__container{
+        width:100vw;
+        flex-grow:0;
+        padding:1rem 0;
+        background-color:black;
+    }
+
+    &__logo {
+        height:4rem;
+    }
+
+    &__links, &__tabs, &__buttons {
+        display:flex;
+        align-items:center;
+        gap:1rem;
+        color:white;
+    }
+}

@@ -1,27 +1,12 @@
 import React from "react";
+import './hero-banner.scss';
+import heroImage from '../assets/images/vander-films-IGZgfepL4qY-unsplash.jpg';
 
 export const HeroBanner = () => {
-  const logo = "https://cdn.auth0.com/blog/developer-hub/react-logo.svg";
 
   return (
-    <div className="hero-banner hero-banner--pink-yellow">
-      <div className="hero-banner__logo">
-        <img className="hero-banner__image" src={logo} alt="React logo" />
-      </div>
-      <h1 className="hero-banner__headline">Hello, React World!</h1>
-      <p className="hero-banner__description">
-        This is a sample application that demonstrates the authentication flow
-        for React apps using <strong>Auth0</strong>.
-      </p>
-      <a
-        id="code-sample-link"
-        target="_blank"
-        rel="noopener noreferrer"
-        href="https://auth0.com/developers/hub/code-samples/spa/react-javascript/basic-authentication"
-        className="button button--secondary"
-      >
-        Check out the React code sample →
-      </a>
+    <div className="hero-banner">
+        <img className="hero-banner__image" src={heroImage} alt="React logo" height='300'/>
     </div>
   );
 };

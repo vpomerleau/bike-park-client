@@ -1,0 +1,11 @@
+.page-layout {
+  display: flex;
+  flex-direction: column;
+  min-height:100vh;
+
+  &__content {
+    flex: 1 0 auto;
+    padding-bottom: 3rem;
+    background-color: orange;
+  }
+}

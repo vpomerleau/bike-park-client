@@ -3,6 +3,7 @@ import { MobileMenuToggleButton } from "./mobile-menu-toggle-button";
 import { MobileNavBarBrand } from "./mobile-nav-bar-brand";
 import { MobileNavBarButtons } from "./mobile-nav-bar-buttons";
 import { MobileNavBarTabs } from "./mobile-nav-bar-tabs";
+import './mobile-nav-bar.scss';
 
 const MobileMenuState = {
   CLOSED: "closed",

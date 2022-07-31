@@ -1,0 +1,15 @@
+.hero-banner {
+    width:100vw;
+    display:flex;
+    flex-grow:1;
+    background-color: black;
+
+    &__image {
+        margin:0 auto;
+        height:30rem;
+        width:100%;
+        max-width:100em;
+        object-fit: cover;
+        object-position:bottom;
+    }
+}

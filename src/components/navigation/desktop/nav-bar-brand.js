@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import logoColourHorizontalWhite from '../../../assets/logos/wbp-color-horizontal-white-text.svg';
 
 export const NavBarBrand = () => {
   return (
@@ -7,10 +8,8 @@ export const NavBarBrand = () => {
       <NavLink to="/" exact>
         <img
           className="nav-bar__logo"
-          src="https://cdn.auth0.com/blog/hub/code-samples/hello-world/auth0-logo.svg"
-          alt="Auth0 shield logo"
-          width="122"
-          height="36"
+          src={logoColourHorizontalWhite}
+          alt="Woodwork Bike Park W logo and wordmark"
         />
       </NavLink>
     </div>

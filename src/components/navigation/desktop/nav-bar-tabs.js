@@ -1,12 +1,13 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import React from "react";
 import { NavBarTab } from "./nav-bar-tab";
+import { Tabs } from "@mui/material";
 
 export const NavBarTabs = () => {
   const { isAuthenticated } = useAuth0();
 
   return (
-    <div className="nav-bar__tabs">
+    <Tabs className="nav-bar__tabs" textColor="light">
       <NavBarTab path="/profile" label="Profile" />
       <NavBarTab path="/public" label="Public" />
       {isAuthenticated && (
@@ -15,6 +16,6 @@ export const NavBarTabs = () => {
           <NavBarTab path="/admin" label="Admin" />
         </>
       )}
-    </div>
+    </Tabs>
   );
 };
