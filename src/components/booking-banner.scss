@@ -1,0 +1,17 @@
+.booking-banner {
+  max-width: 80em;
+  margin: 0 auto;
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  padding:1rem 0;
+  color: white;
+
+  &__container {
+    background-color: black;
+  }
+
+  &__text {
+    margin: 0;
+  }
+}

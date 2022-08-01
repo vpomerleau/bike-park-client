@@ -4,6 +4,7 @@ import { Switch, Route } from "react-router-dom";
 import { PageLoader } from "./components/page-loader";
 import { ProtectedRoute } from "./components/protected-route";
 import { AdminPage } from "./pages/admin-page";
+import { BookingPage } from "./pages/booking-page";
 import { CallbackPage } from "./pages/callback-page";
 import { CheckoutPage } from "./pages/checkout-page";
 import { HomePage } from "./pages/home-page";
@@ -28,6 +29,7 @@ export const App = () => {
       <Route path="/" exact component={HomePage} />
       <ProtectedRoute path="/profile" component={ProfilePage} />
       <Route path="/public" component={PublicPage} />
+      <Route exact path='/booking' component={BookingPage} />
       <Route exact path='/checkout' component={CheckoutPage} />
       <ProtectedRoute path="/protected" component={ProtectedPage} />
       <ProtectedRoute path="/admin" component={AdminPage} />
