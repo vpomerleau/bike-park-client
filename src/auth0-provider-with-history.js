@@ -14,8 +14,6 @@ export const Auth0ProviderWithHistory = ({ children }) => {
     history.push(appState?.returnTo || window.location.pathname);
   };
 
-  console.log(domain);
-
   if (!(domain && clientId && audience)) {
     return null;
   }

@@ -1,7 +1,7 @@
 import React from "react";
 import { NavBarBrand } from "./nav-bar-brand";
 import { NavBarButtons } from "./nav-bar-buttons";
-import { NavBarTabs } from "./nav-bar-tabs";
+import { NavBarLinks } from "./nav-bar-links";
 import "./nav-bar.scss";
 
 export const NavBar = () => {
@@ -10,7 +10,7 @@ export const NavBar = () => {
       <nav className="nav-bar">
         <NavBarBrand />
         <div className="nav-bar__links">
-          <NavBarTabs />
+          <NavBarLinks />
           <NavBarButtons />
         </div>
       </nav>
