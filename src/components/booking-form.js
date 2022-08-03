@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import {
   Button,
@@ -22,6 +22,26 @@ const prices = {
 export const BookingForm = () => {
   const [numDaypass, setNumDaypass] = useState(0);
   const [cart, setCart] = useState({});
+  const [products, setProducts] = useState({});
+
+  const serverURL = process.env.REACT_APP_API_SERVER_URL;
+  const getAllProducts = () => {
+    axios
+      .get(`${serverURL}/products`, {
+        headers: {
+          "content-type": "application/json",
+        },
+      })
+      .then((res) => {
+        setProducts(res.data);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  // Get list of all products from database
+  useEffect(() => {
+    getAllProducts();
+  }, []);
 
   const handleNumDaypassChange = (e) => {
     setNumDaypass(e.target.value);
@@ -45,14 +65,14 @@ export const BookingForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     // convert cart state to JSON item list
     const body = JSON.stringify(cart);
 
     axios
       .post(
-        `${process.env.REACT_APP_API_SERVER_URL}//create-payment-intent`,
-        body,
+        `${process.env.REACT_APP_API_SERVER_URL}/create-payment-intent`,
+        body
       )
       .then()
       .catch();
