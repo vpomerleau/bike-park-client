@@ -13,6 +13,7 @@ import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 
 import "./booking-form.scss";
+import { Product } from "./product";
 
 // TODO: get from database
 const prices = {
@@ -43,20 +44,20 @@ export const BookingForm = () => {
     getAllProducts();
   }, []);
 
-  const handleNumDaypassChange = (e) => {
-    setNumDaypass(e.target.value);
-    console.log(numDaypass);
-  };
+  // const handleNumDaypassChange = (e) => {
+  //   setNumDaypass(e.target.value);
+  //   console.log(numDaypass);
+  // };
 
-  const handleDecreaseDaypass = (e) => {
-    e.preventDefault();
-    setNumDaypass(parseInt(numDaypass) - 1);
-  };
+  // const handleDecreaseDaypass = (e) => {
+  //   e.preventDefault();
+  //   setNumDaypass(parseInt(numDaypass) - 1);
+  // };
 
-  const handleIncreaseDaypass = (e) => {
-    e.preventDefault();
-    setNumDaypass(parseInt(numDaypass) + 1);
-  };
+  // const handleIncreaseDaypass = (e) => {
+  //   e.preventDefault();
+  //   setNumDaypass(parseInt(numDaypass) + 1);
+  // };
 
   const handleCartReset = (e) => {
     e.preventDefault();
@@ -79,49 +80,11 @@ export const BookingForm = () => {
   };
 
   return (
+
     <Paper className="booking-form__container">
       <form className="booking-form" onSubmit={handleSubmit}>
         <Grid container spacing={2}>
-          <Grid item>
-            {/* Style card https://material.io/components/cards */}
-            <Card>
-              {/* Add card media */}
-              {/* Convert to card content */}
-              <Typography>Full Day Pass</Typography>
-              <Typography>
-                {prices.regular.toLocaleString("en-CA", {
-                  style: "currency",
-                  currency: "cad",
-                })}
-              </Typography>
-              {/* Card actions */}
-              <div>
-                <IconButton
-                  aria-label="decrease"
-                  value="-1"
-                  onClick={handleDecreaseDaypass}
-                  disabled={numDaypass <= 0}>
-                  <RemoveCircleIcon />
-                </IconButton>
-                <TextField
-                  value={numDaypass}
-                  onChange={handleNumDaypassChange}
-                />
-                <IconButton
-                  aria-label="increase"
-                  value="1"
-                  onClick={handleIncreaseDaypass}>
-                  <AddCircleIcon />
-                </IconButton>
-                <Typography>
-                  {(numDaypass * prices.regular).toLocaleString("en-CA", {
-                    style: "currency",
-                    currency: "cad",
-                  })}
-                </Typography>
-              </div>
-            </Card>
-          </Grid>
+          {Array.from(products).map((product)=>{return(<Product item={product}/>)})}
         </Grid>
 
         <Typography>
