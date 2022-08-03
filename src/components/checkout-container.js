@@ -3,20 +3,20 @@ import axios from "axios";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 
-import { PageLayout } from "../components/page-layout";
-import CheckoutForm from "../components/checkoutForm/checkoutForm";
+import CheckoutForm from "./checkout-form/checkout-form";
+import { Paper } from "@mui/material";
 
 // Make sure to call loadStripe outside of a component’s render to avoid
 // recreating the Stripe object on every render.
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_SECRET_TEST_KEY);
 
-export const CheckoutPage = () => {
+export const CheckoutContainer = () => {
   const [clientSecret, setClientSecret] = useState("");
 
   // Create PaymentIntent as soon as the page loads
   useEffect(() => {
     const apiUrl = process.env.REACT_APP_API_SERVER_URL;
-    const body = JSON.stringify({ items: [{ id: "xl-tshirt" }] });
+    const body = JSON.stringify({ items: [{ id: "xl-tshirt" }] }); // get cart from localStorage or state?
 
     axios
       .post(`${apiUrl}/create-payment-intent`, body, {
@@ -28,7 +28,11 @@ export const CheckoutPage = () => {
   }, []);
 
   const appearance = {
-    theme: "stripe",
+    theme: "flat",
+    variables:{
+      fontFamily:'Roboto, Helvetica, Arial, sans-serif',
+      borderRadius:'2px'
+    }
   };
   const options = {
     clientSecret,
@@ -36,12 +40,12 @@ export const CheckoutPage = () => {
   };
 
   return (
-    <PageLayout>
+    <Paper>
       {clientSecret && (
         <Elements options={options} stripe={stripePromise}>
           <CheckoutForm />
         </Elements>
       )}
-    </PageLayout>
+    </Paper>
   );
 };

@@ -6,7 +6,7 @@ import { ProtectedRoute } from "./components/protected-route";
 import { AdminPage } from "./pages/admin-page";
 import { BookingPage } from "./pages/booking-page";
 import { CallbackPage } from "./pages/callback-page";
-import { CheckoutPage } from "./pages/checkout-page";
+import { CheckoutPage } from "./components/checkout-container";
 import { HomePage } from "./pages/home-page";
 import { NotFoundPage } from "./pages/not-found-page";
 import { ProfilePage } from "./pages/profile-page";
@@ -30,7 +30,6 @@ export const App = () => {
       <ProtectedRoute path="/profile" component={ProfilePage} />
       <Route path="/public" component={PublicPage} />
       <Route exact path='/booking' component={BookingPage} />
-      <Route exact path='/checkout' component={CheckoutPage} />
       <ProtectedRoute path="/protected" component={ProtectedPage} />
       <ProtectedRoute path="/admin" component={AdminPage} />
       <Route path="/callback" component={CallbackPage} />

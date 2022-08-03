@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import {
   PaymentElement,
   useStripe,
-  useElements
+  useElements,
 } from "@stripe/react-stripe-js";
+import { Box, Button, Paper, TextField } from "@mui/material";
+import "./checkout-form.scss";
 
 export default function CheckoutForm() {
   const stripe = useStripe();
@@ -11,6 +13,8 @@ export default function CheckoutForm() {
 
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [email, setEmail] = useState('');
+  // TODO link to sessionStorage to retrieve logged in user's email
 
   useEffect(() => {
     if (!stripe) {
@@ -77,15 +81,37 @@ export default function CheckoutForm() {
   };
 
   return (
-    <form id="payment-form" onSubmit={handleSubmit}>
-      <PaymentElement id="payment-element" />
-      <button disabled={isLoading || !stripe || !elements} id="submit">
-        <span id="button-text">
-          {isLoading ? <div className="spinner" id="spinner"></div> : "Pay now"}
-        </span>
-      </button>
-      {/* Show any error or success messages */}
-      {message && <div id="payment-message">{message}</div>}
-    </form>
+    <Paper className="checkout-form__container">
+      <form id="payment-form" className="checkout-form" onSubmit={handleSubmit}>
+        <Box>
+          <TextField
+            value={email || null}
+            label="Email"
+            type="email"
+            defaultValue="username@domain.com"
+            variant="filled"
+            margin="normal"
+            fullWidth
+            required
+          />
+          {/* TODO add onChange for controlled component */}
+        </Box>
+        <PaymentElement id="payment-element" />
+        <Button
+          variant="contained"
+          disabled={isLoading || !stripe || !elements}
+          id="submit">
+          <span id="button-text">
+            {isLoading ? (
+              <div className="spinner" id="spinner"></div>
+            ) : (
+              "Pay now"
+            )}
+          </span>
+        </Button>
+        {/* Show any error or success messages */}
+        {message && <div id="payment-message">{message}</div>}
+      </form>
+    </Paper>
   );
 }
