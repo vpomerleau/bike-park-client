@@ -10,22 +10,22 @@ import { Paper } from "@mui/material";
 // recreating the Stripe object on every render.
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_SECRET_TEST_KEY);
 
-export const CheckoutContainer = () => {
-  const [clientSecret, setClientSecret] = useState("");
+export const CheckoutContainer = ({clientSecret}) => {
+  // const [clientSecret, setClientSecret] = useState("");
 
   // Create PaymentIntent as soon as the page loads
-  useEffect(() => {
-    const apiUrl = process.env.REACT_APP_API_SERVER_URL;
-    const body = JSON.stringify({ items: [{ id: "xl-tshirt" }] }); // get cart from localStorage or state?
+  // useEffect(() => {
+  //   const apiUrl = process.env.REACT_APP_API_SERVER_URL;
+  //   const body = JSON.stringify({ items: [{ id: "xl-tshirt" }] }); // get cart from localStorage or state?
 
-    axios
-      .post(`${apiUrl}/create-payment-intent`, body, {
-        headers: { "Content-Type": "application/json" },
-      })
-      .then((res) => {
-        setClientSecret(res.data.clientSecret);
-      });
-  }, []);
+  //   axios
+  //     .post(`${apiUrl}/create-payment-intent`, body, {
+  //       headers: { "Content-Type": "application/json" },
+  //     })
+  //     .then((res) => {
+  //       setClientSecret(res.data.clientSecret);
+  //     });
+  // }, []);
 
   const appearance = {
     theme: "flat",

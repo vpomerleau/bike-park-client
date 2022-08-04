@@ -5,10 +5,11 @@ import { Button, Grid, Paper, Typography } from "@mui/material";
 import "./booking-form.scss";
 import { Product } from "./product";
 
-export const BookingForm = () => {
+export const BookingForm = (props) => {
   const [cart, setCart] = useState([]);
   const [products, setProducts] = useState([]);
   const [total, setTotal] = useState(0);
+
 
   const serverURL = process.env.REACT_APP_API_SERVER_URL;
   const getAllProducts = () => {
@@ -64,16 +65,21 @@ export const BookingForm = () => {
 
     // convert cart state to JSON item list
     const body = JSON.stringify(cart);
+    console.log(body);
 
     axios
       .post(
         `${process.env.REACT_APP_API_SERVER_URL}/create-payment-intent`,
-        body
+        body,
+        {
+          headers: { "Content-Type": "application/json" },
+        }
       )
-      .then(() => {
-        e.target.reset();
-        setCart([]);
-        setTotal(0);
+      .then((res) => {
+        props.setClientSecret(res.data.clientSecret);
+        // e.target.reset();
+        // setCart([]);
+        // setTotal(0);
       })
       .catch((err) => console.log(err));
   };

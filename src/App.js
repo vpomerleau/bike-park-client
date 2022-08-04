@@ -6,7 +6,6 @@ import { ProtectedRoute } from "./components/protected-route";
 import { AdminPage } from "./pages/admin-page";
 import { BookingPage } from "./pages/booking-page";
 import { CallbackPage } from "./pages/callback-page";
-import { CheckoutPage } from "./components/checkout-container";
 import { HomePage } from "./pages/home-page";
 import { NotFoundPage } from "./pages/not-found-page";
 import { ProfilePage } from "./pages/profile-page";
