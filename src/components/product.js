@@ -1,21 +1,24 @@
 import React, { useEffect, useState } from "react";
-import { Card, Grid, IconButton, TextField, Typography } from "@mui/material";
-import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
+import {
+  Button,
+  ButtonGroup,
+  Card,
+  Divider,
+  Grid,
+  TextField,
+  Typography,
+} from "@mui/material";
 
 import "./booking-form.scss";
 
 export const Product = (props) => {
   const [quantity, setQuantity] = useState(0);
-  const { name, price, id } = props.item;
+  const { name, description, price, id } = props.item;
 
-  useEffect(
-    () => {
-        const cartItem = {id:id, name:name,quantity:quantity,price:price};
-        props.updateCart(cartItem);
-    },
-    [quantity],
-  );
+  useEffect(() => {
+    const cartItem = { id: id, name: name, quantity: quantity, price: price };
+    props.updateCart(cartItem);
+  }, [quantity]);
 
   const handleQuantityChange = (e) => {
     e.preventDefault();
@@ -32,36 +35,55 @@ export const Product = (props) => {
     setQuantity(parseInt(quantity) + 1);
   };
 
+  const stepperButtons = [
+    <Button
+      aria-label="increase"
+      value="1"
+      onClick={handleIncreaseQuantity}>
+      +
+    </Button>,
+    <Button
+      aria-label="decrease"
+      value="-1"
+      onClick={handleDecreaseQuantity}
+      disabled={quantity <= 0}>
+      -
+    </Button>,
+  ];
+
   return (
-    <Grid item>
+    <Grid item xs={12} md={6} lg={4}>
       {/* Style card https://material.io/components/cards */}
-      <Card>
+      <Card sx={{ p: "2rem" }}>
         {/* TODO Add card media */}
         {/* TODO Convert to card content */}
-        <Typography>{name}</Typography>
+        <Typography sx={{fontSize:'1.5rem', fontWeight:'bold', textTransform:'capitalize'}}>{name}</Typography>
+        <Divider />
+        <Typography sx={{ minHeight: "5rem", py: "1rem" }}>
+          {description}
+        </Typography>
         <Typography>
           {price.toLocaleString("en-CA", {
             style: "currency",
             currency: "cad",
-          })}
+          })}/pass
         </Typography>
         {/* TODO Card actions */}
         <div>
-          <IconButton
-            aria-label="decrease"
-            value="-1"
-            onClick={handleDecreaseQuantity}
-            disabled={quantity <= 0}>
-            <RemoveCircleIcon />
-          </IconButton>
           <TextField value={quantity} onChange={handleQuantityChange} />
-          <IconButton
-            aria-label="increase"
-            value="1"
-            onClick={handleIncreaseQuantity}>
-            <AddCircleIcon />
-          </IconButton>
-          <Typography>Sub-total: 
+          <ButtonGroup
+            orientation="vertical"
+            aria-label="vertical contained button group"
+            variant="contained"
+            size="small"
+            disableElevation
+            sx={{ml:"1rem"}}>
+            {stepperButtons}
+          </ButtonGroup>
+          <Divider textAlign="right" sx={{ mt: "2rem", mb: "1rem" }}>
+            Sub-total
+          </Divider>
+          <Typography textAlign="right">
             {(quantity * price).toLocaleString("en-CA", {
               style: "currency",
               currency: "cad",

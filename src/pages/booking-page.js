@@ -1,5 +1,7 @@
-import { Grid } from "@mui/material";
-import React, {useState} from "react";
+import React, { useState } from "react";
+import {
+  Typography,
+} from "@mui/material";
 import { BookingForm } from "../components/booking-form";
 import { CheckoutContainer } from "../components/checkout-container";
 import { PageLayout } from "../components/page-layout";
@@ -10,19 +12,11 @@ export const BookingPage = () => {
 
   return (
     <PageLayout>
-      <Grid
-        container
-        spacing={2}
-        justifyContent="space-around"
-        alignItems="flex-start"
-        className="booking-page">
-        <Grid item xs="auto">
-          <BookingForm setClientSecret={setClientSecret} />
-        </Grid>
-        <Grid item xs="auto">
-          <CheckoutContainer clientSecret={clientSecret} />
-        </Grid>
-      </Grid>
+      <div className="booking-page">
+        <Typography variant="h3">Pass options</Typography>
+        <BookingForm setClientSecret={setClientSecret} />
+        <CheckoutContainer clientSecret={clientSecret} />
+      </div>
     </PageLayout>
   );
 };
