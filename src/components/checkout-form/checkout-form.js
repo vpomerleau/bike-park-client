@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
 import {
   PaymentElement,
   useStripe,
@@ -8,13 +9,17 @@ import { Box, Button, Paper, TextField } from "@mui/material";
 import "./checkout-form.scss";
 
 export default function CheckoutForm() {
+  const { user } = useAuth0();
+  console.log(user);
+  const initialState = user? user.email : '';
+
   const stripe = useStripe();
   const elements = useElements();
 
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [email, setEmail] = useState('');
-  // TODO link to sessionStorage to retrieve logged in user's email
+  const [email, setEmail] = useState(initialState);
+
 
   useEffect(() => {
     if (!stripe) {

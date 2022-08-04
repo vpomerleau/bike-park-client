@@ -65,7 +65,6 @@ export const BookingForm = (props) => {
 
     // convert cart state to JSON item list
     const body = JSON.stringify(cart);
-    console.log(body);
 
     axios
       .post(
