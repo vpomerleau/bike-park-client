@@ -5,7 +5,7 @@ import {
   useStripe,
   useElements,
 } from "@stripe/react-stripe-js";
-import { Box, Button, Paper, TextField } from "@mui/material";
+import { Alert, Box, Button, Paper, TextField, Typography } from "@mui/material";
 import "./checkout-form.scss";
 
 export default function CheckoutForm() {
@@ -61,6 +61,7 @@ export default function CheckoutForm() {
     e.preventDefault();
 
     if (!stripe || !elements) {
+      console.log ('stripe.js has not yet loaded');
       // Stripe.js has not yet loaded.
       // Make sure to disable form submission until Stripe.js has loaded.
       return;
@@ -71,7 +72,7 @@ export default function CheckoutForm() {
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        // Make sure to change this to your payment completion page
+        // TODO Make sure to change this to your payment completion page
         return_url: "http://localhost:3000",
       },
     });
@@ -83,8 +84,10 @@ export default function CheckoutForm() {
     // redirected to the `return_url`.
     if (error.type === "card_error" || error.type === "validation_error") {
       setMessage(error.message);
+      console.log(message);
     } else {
       setMessage("An unexpected error occurred.");
+      console.log(message);
     }
 
     setIsLoading(false);
@@ -92,6 +95,7 @@ export default function CheckoutForm() {
 
   return (
     <Paper className="checkout-form__container">
+      <Typography variant="h3">Payment</Typography>
       <form id="payment-form" className="checkout-form" onSubmit={handleSubmit}>
         <Box>
           <TextField
@@ -104,6 +108,7 @@ export default function CheckoutForm() {
             fullWidth
             required
           />
+          <Alert severity="info">This Stripe payment form is running in Test mode. No payment will be collected. <br />To test the form, you may use the test card number "4000001240000000", any future date for expiry and any sequence of three digits for the CVC.</Alert>
         </Box>
         <PaymentElement id="payment-element" />
         <Button
