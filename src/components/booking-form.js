@@ -4,6 +4,7 @@ import { Button, Grid, Paper, Typography } from "@mui/material";
 
 import "./booking-form.scss";
 import { Product } from "./product";
+import createAuth0Client from "@auth0/auth0-spa-js";
 
 export const BookingForm = (props) => {
   const [cart, setCart] = useState([]);
@@ -30,6 +31,11 @@ export const BookingForm = (props) => {
     getAllProducts();
   }, []);
 
+  const isCartEmpty = () => {
+    const emptyCart = (cart.filter(item=>item.quantity>0).length>0 ? false : true);
+    return emptyCart;
+  }
+
   // Update cart content and order total when item quantity changes
   const updateCart = (cartItem) => {
     const itemInCart = cart.find(({ id }) => id === cartItem.id);
@@ -55,9 +61,6 @@ export const BookingForm = (props) => {
   // TODO cart reset
   const handleCartReset = (e) => {
     e.preventDefault();
-
-    // setCart([]);
-    // setTotal(0);
   };
 
   const handleSubmit = (e) => {
@@ -76,9 +79,6 @@ export const BookingForm = (props) => {
       )
       .then((res) => {
         props.setClientSecret(res.data.clientSecret);
-        // e.target.reset();
-        // setCart([]);
-        // setTotal(0);
       })
       .catch((err) => console.log(err));
   };
@@ -108,8 +108,7 @@ export const BookingForm = (props) => {
         <Button variant="outlined" onClick={handleCartReset}>
           Reset Cart
         </Button>
-        {/* TODO disable button when cart is empty */}
-        <Button type="submit" variant="contained">
+        <Button type="submit" variant="contained" disabled={isCartEmpty()}>
           Checkout
         </Button>
       </form>
