@@ -31,17 +31,16 @@ export const BookingForm = () => {
 
   // Update cart content and order total when item quantity changes
   const updateCart = (cartItem) => {
-    const itemInCart = cart.find(({id}) => id === cartItem.id);
+    const itemInCart = cart.find(({ id }) => id === cartItem.id);
     if (!itemInCart) {
       setCart([...cart, cartItem]);
-      setTotal(total + (cartItem.quantity*cartItem.price));
+      setTotal(total + cartItem.quantity * cartItem.price);
     } else {
       const newItems = cart.map((item) => {
         if (cartItem.id === item.id) {
-          if (cartItem.quantity < item.quantity){
+          if (cartItem.quantity < item.quantity) {
             setTotal(total - cartItem.price);
-          }
-          else if (cartItem.quantity>item.quantity){
+          } else if (cartItem.quantity > item.quantity) {
             setTotal(total + cartItem.price);
           }
           return { ...cartItem };
@@ -52,10 +51,10 @@ export const BookingForm = () => {
     }
   };
 
+  // TODO cart reset
   const handleCartReset = (e) => {
     e.preventDefault();
-    e.target.form.map((element)=>{})
-    console.log(e);
+
     // setCart([]);
     // setTotal(0);
   };
@@ -71,8 +70,12 @@ export const BookingForm = () => {
         `${process.env.REACT_APP_API_SERVER_URL}/create-payment-intent`,
         body
       )
-      .then()
-      .catch();
+      .then(() => {
+        e.target.reset();
+        setCart([]);
+        setTotal(0);
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
