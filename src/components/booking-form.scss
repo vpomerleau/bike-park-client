@@ -1,3 +1,8 @@
 .booking-form {
     padding:1rem;
+    &__actions {
+        display:flex;
+        justify-content:flex-end;
+        gap:1rem;
+    }
 }

@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Button, Grid, Paper, Typography } from "@mui/material";
+import { Box, Button, Container, Grid, Paper, Typography } from "@mui/material";
 
 import "./booking-form.scss";
 import { Product } from "./product";
-import createAuth0Client from "@auth0/auth0-spa-js";
 
 export const BookingForm = (props) => {
   const [cart, setCart] = useState([]);
   const [products, setProducts] = useState([]);
   const [total, setTotal] = useState(0);
-
 
   const serverURL = process.env.REACT_APP_API_SERVER_URL;
   const getAllProducts = () => {
@@ -32,9 +30,10 @@ export const BookingForm = (props) => {
   }, []);
 
   const isCartEmpty = () => {
-    const emptyCart = (cart.filter(item=>item.quantity>0).length>0 ? false : true);
+    const emptyCart =
+      cart.filter((item) => item.quantity > 0).length > 0 ? false : true;
     return emptyCart;
-  }
+  };
 
   // Update cart content and order total when item quantity changes
   const updateCart = (cartItem) => {
@@ -98,19 +97,27 @@ export const BookingForm = (props) => {
           })}
         </Grid>
 
-        <Typography>
-          Total:{" "}
+        {cart.map(item=>{ return (
+          item.quantity>0 &&
+          <Typography align='right' sx={{my:'1rem'}}>{item.quantity} {item.name}</Typography>
+        );
+        })}
+
+        <Typography align='right' sx={{fontSize:'2rem', my:'2rem'}}>
+          Total:
           {total.toLocaleString("en-CA", {
             style: "currency",
             currency: "cad",
           })}
         </Typography>
-        <Button variant="outlined" onClick={handleCartReset}>
-          Reset Cart
-        </Button>
-        <Button type="submit" variant="contained" disabled={isCartEmpty()}>
-          Checkout
-        </Button>
+        <div className="booking-form__actions">
+          <Button variant="outlined" onClick={handleCartReset}>
+            Reset Cart
+          </Button>
+          <Button type="submit" variant="contained" disabled={isCartEmpty()}>
+            Checkout
+          </Button>
+        </div>
       </form>
     </Paper>
   );
