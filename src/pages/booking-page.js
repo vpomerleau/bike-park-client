@@ -11,7 +11,7 @@ export const BookingPage = () => (
       container
       spacing={2}
       justifyContent="space-around"
-      aligIitems="flex-start"
+      alignItems="flex-start"
       className="booking-page">
       <Grid item xs="auto">
         <BookingForm />

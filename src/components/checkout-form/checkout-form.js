@@ -47,6 +47,11 @@ export default function CheckoutForm() {
     });
   }, [stripe]);
 
+  const handleEmailInput = (e) => {
+    e.preventDefault();
+    setEmail(e.target.value);
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -85,16 +90,15 @@ export default function CheckoutForm() {
       <form id="payment-form" className="checkout-form" onSubmit={handleSubmit}>
         <Box>
           <TextField
-            value={email || null}
+            value={email}
             label="Email"
             type="email"
-            defaultValue="username@domain.com"
             variant="filled"
             margin="normal"
+            onChange={handleEmailInput}
             fullWidth
             required
           />
-          {/* TODO add onChange for controlled component */}
         </Box>
         <PaymentElement id="payment-element" />
         <Button

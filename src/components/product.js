@@ -1,15 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Card, Grid, IconButton, TextField, Typography } from "@mui/material";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 
 import "./booking-form.scss";
 
-export const Product = ({ item }) => {
+export const Product = (props) => {
   const [quantity, setQuantity] = useState(0);
-  const { name, price } = item;
+  const { name, price, id } = props.item;
+
+  useEffect(
+    () => {
+        const cartItem = {id:id, name:name,quantity:quantity,price:price};
+        props.updateCart(cartItem);
+    },
+    [quantity],
+  );
 
   const handleQuantityChange = (e) => {
+    e.preventDefault();
     setQuantity(e.target.value);
   };
 
@@ -27,8 +36,8 @@ export const Product = ({ item }) => {
     <Grid item>
       {/* Style card https://material.io/components/cards */}
       <Card>
-        {/* Add card media */}
-        {/* Convert to card content */}
+        {/* TODO Add card media */}
+        {/* TODO Convert to card content */}
         <Typography>{name}</Typography>
         <Typography>
           {price.toLocaleString("en-CA", {
@@ -36,7 +45,7 @@ export const Product = ({ item }) => {
             currency: "cad",
           })}
         </Typography>
-        {/* Card actions */}
+        {/* TODO Card actions */}
         <div>
           <IconButton
             aria-label="decrease"
