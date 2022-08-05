@@ -60,6 +60,36 @@ export const BookingForm = (props) => {
     }
   };
 
+  const createPaymentIntent = () => {
+    const cartDetails = JSON.stringify(props.cart);
+
+    axios
+      .post(
+        `${process.env.REACT_APP_API_SERVER_URL}/stripe/create-payment-intent`,
+        cartDetails,
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      )
+      .then((res) => {
+        props.setClientSecret(res.data.clientSecret);
+        props.setPaymentIntentId(res.data.paymentIntentId);
+      })
+      .catch((err) => console.log(err));
+  }
+
+  const getRiderId =() => {
+
+  }
+
+  const createTransactionRecord =() =>{
+
+  }
+
+  const logRiderProducts = () => {
+
+  }
+
   // TODO cart reset
   // const handleCartReset = (e) => {
   //   e.preventDefault();
@@ -68,21 +98,15 @@ export const BookingForm = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // convert user and cart to JSON and combine them for sending in the POST request
-    const body = JSON.stringify({user:user, cart:props.cart});
+    // Send payment intent to Stripe
+    // returns client secret and payment intent id
+    createPaymentIntent();
 
-    axios
-      .post(
-        `${process.env.REACT_APP_API_SERVER_URL}/stripe/create-payment-intent`,
-        body,
-        {
-          headers: { "Content-Type": "application/json" },
-        }
-      )
-      .then((res) => {
-        props.setClientSecret(res.data.clientSecret);
-      })
-      .catch((err) => console.log(err));
+    // Add transaction to transactions table
+
+    // Add purchased producted to rider_products table
+
+
   };
 
   return (

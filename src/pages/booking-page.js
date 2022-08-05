@@ -13,8 +13,8 @@ import "./booking-page.scss";
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_SECRET_TEST_KEY);
 
 export const BookingPage = () => {
-
   const [clientSecret, setClientSecret] = useState("");
+  const [paymentIntentId, setPaymentIntentId] = useState("");
   const [cart, setCart] = useState([]);
   const [total, setTotal] = useState(0);
 
@@ -33,10 +33,22 @@ export const BookingPage = () => {
   return (
     <PageLayout>
       <div className="booking-page">
-        <BookingForm setClientSecret={setClientSecret} cart={cart} setCart={setCart} total={total} setTotal={setTotal} />
+        <BookingForm
+          setClientSecret={setClientSecret}
+          paymentIntentId={paymentIntentId}
+          setPaymentIntentId={setPaymentIntentId}
+          cart={cart}
+          setCart={setCart}
+          total={total}
+          setTotal={setTotal}
+        />
         {clientSecret && (
           <Elements options={options} stripe={stripePromise}>
-            <CheckoutForm clientSecret={clientSecret} cart={cart} total={total} />
+            <CheckoutForm
+              clientSecret={clientSecret}
+              cart={cart}
+              total={total}
+            />
           </Elements>
         )}
       </div>
