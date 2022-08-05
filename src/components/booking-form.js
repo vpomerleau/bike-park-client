@@ -68,7 +68,7 @@ export const BookingForm = (props) => {
 
     axios
       .post(
-        `${process.env.REACT_APP_API_SERVER_URL}/create-payment-intent`,
+        `${process.env.REACT_APP_API_SERVER_URL}/stripe/create-payment-intent`,
         body,
         {
           headers: { "Content-Type": "application/json" },
