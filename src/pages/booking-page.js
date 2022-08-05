@@ -14,6 +14,8 @@ const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_SECRET_TEST_KEY);
 
 export const BookingPage = () => {
   const [clientSecret, setClientSecret] = useState("");
+  const [cart, setCart] = useState([]);
+  const [total, setTotal] = useState(0);
 
   const appearance = {
     theme: "flat",
@@ -30,10 +32,10 @@ export const BookingPage = () => {
   return (
     <PageLayout>
       <div className="booking-page">
-        <BookingForm setClientSecret={setClientSecret} />
+        <BookingForm setClientSecret={setClientSecret} cart={cart} setCart={setCart} total={total} setTotal={setTotal} />
         {clientSecret && (
           <Elements options={options} stripe={stripePromise}>
-            <CheckoutForm clientSecret={clientSecret} />
+            <CheckoutForm clientSecret={clientSecret} cart={cart} total={total} />
           </Elements>
         )}
       </div>

@@ -12,6 +12,15 @@ import { NotFoundPage } from "./pages/not-found-page";
 import { ProfilePage } from "./pages/profile-page";
 import { ProtectedPage } from "./pages/protected-page";
 import { PublicPage } from "./pages/public-page";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#2e845d",
+    },
+  },
+});
 
 export const App = () => {
   const { isLoading } = useAuth0();
@@ -25,16 +34,18 @@ export const App = () => {
   }
 
   return (
-    <Switch>
-      <Route path="/" exact component={HomePage} />
-      <ProtectedRoute path="/profile" component={ProfilePage} />
-      <Route path="/public" component={PublicPage} />
-      <Route exact path="/booking" component={BookingPage} />
-      <Route path="/booking/result" component={BookingResult} />
-      <ProtectedRoute path="/protected" component={ProtectedPage} />
-      <ProtectedRoute path="/admin" component={AdminPage} />
-      <Route path="/callback" component={CallbackPage} />
-      <Route path="*" component={NotFoundPage} />
-    </Switch>
+    <ThemeProvider theme={theme}>
+      <Switch>
+        <Route path="/" exact component={HomePage} />
+        <ProtectedRoute path="/profile" component={ProfilePage} />
+        <Route path="/public" component={PublicPage} />
+        <Route exact path="/booking" component={BookingPage} />
+        <Route path="/booking/result" component={BookingResult} />
+        <ProtectedRoute path="/protected" component={ProtectedPage} />
+        <ProtectedRoute path="/admin" component={AdminPage} />
+        <Route path="/callback" component={CallbackPage} />
+        <Route path="*" component={NotFoundPage} />
+      </Switch>
+    </ThemeProvider>
   );
 };

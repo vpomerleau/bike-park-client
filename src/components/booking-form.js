@@ -6,9 +6,7 @@ import "./booking-form.scss";
 import { Product } from "./product";
 
 export const BookingForm = (props) => {
-  const [cart, setCart] = useState([]);
   const [products, setProducts] = useState([]);
-  const [total, setTotal] = useState(0);
 
   const serverURL = process.env.REACT_APP_API_SERVER_URL;
   const getAllProducts = () => {
@@ -31,29 +29,29 @@ export const BookingForm = (props) => {
 
   const isCartEmpty = () => {
     const emptyCart =
-      cart.filter((item) => item.quantity > 0).length > 0 ? false : true;
+      props.cart.filter((item) => item.quantity > 0).length > 0 ? false : true;
     return emptyCart;
   };
 
   // Update cart content and order total when item quantity changes
   const updateCart = (cartItem) => {
-    const itemInCart = cart.find(({ id }) => id === cartItem.id);
+    const itemInCart = props.cart.find(({ id }) => id === cartItem.id);
     if (!itemInCart) {
-      setCart([...cart, cartItem]);
-      setTotal(total + cartItem.quantity * cartItem.price);
+      props.setCart([...props.cart, cartItem]);
+      props.setTotal(props.total + cartItem.quantity * cartItem.price);
     } else {
-      const newItems = cart.map((item) => {
+      const newItems = props.cart.map((item) => {
         if (cartItem.id === item.id) {
           if (cartItem.quantity < item.quantity) {
-            setTotal(total - cartItem.price);
+            props.setTotal(props.total - cartItem.price);
           } else if (cartItem.quantity > item.quantity) {
-            setTotal(total + cartItem.price);
+            props.setTotal(props.total + cartItem.price);
           }
           return { ...cartItem };
         }
         return item;
       });
-      setCart(newItems);
+      props.setCart(newItems);
     }
   };
 
@@ -66,7 +64,7 @@ export const BookingForm = (props) => {
     e.preventDefault();
 
     // convert cart state to JSON item list
-    const body = JSON.stringify(cart);
+    const body = JSON.stringify(props.cart);
 
     axios
       .post(
@@ -98,7 +96,7 @@ export const BookingForm = (props) => {
           })}
         </Grid>
 
-        {cart.map((item) => {
+        {props.cart.map((item) => {
           return (
             item.quantity > 0 && (
               <Typography key={item.id} align="right" sx={{ my: "1rem" }}>
@@ -110,7 +108,7 @@ export const BookingForm = (props) => {
 
         <Typography align="right" sx={{ fontSize: "2rem", my: "2rem" }}>
           Total:
-          {total.toLocaleString("en-CA", {
+          {props.total.toLocaleString("en-CA", {
             style: "currency",
             currency: "cad",
           })}
