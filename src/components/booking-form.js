@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Box, Button, Container, Grid, Paper, Typography } from "@mui/material";
+import { useAuth0 } from "@auth0/auth0-react";
+import { Button, Grid, Typography } from "@mui/material";
+
+import { Product } from "./product";
 
 import "./booking-form.scss";
-import { Product } from "./product";
+
+const serverURL = process.env.REACT_APP_API_SERVER_URL;
 
 export const BookingForm = (props) => {
   const [products, setProducts] = useState([]);
 
-  const serverURL = process.env.REACT_APP_API_SERVER_URL;
+  const { user } = useAuth0();
+
   const getAllProducts = () => {
     axios
       .get(`${serverURL}/products`, {
@@ -63,8 +68,8 @@ export const BookingForm = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // convert cart state to JSON item list
-    const body = JSON.stringify(props.cart);
+    // convert user and cart to JSON and combine them for sending in the POST request
+    const body = JSON.stringify({user:user, cart:props.cart});
 
     axios
       .post(
