@@ -5,17 +5,10 @@ import {
   useStripe,
   useElements,
 } from "@stripe/react-stripe-js";
-import {
-  Alert,
-  Box,
-  Button,
-  Card,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Alert, Box, Button, Card, TextField, Typography } from "@mui/material";
 import "./checkout-form.scss";
 
-export default function CheckoutForm() {
+export const CheckoutForm = () => {
   const { user } = useAuth0();
   const initialState = user ? user.email : "";
 
@@ -77,8 +70,9 @@ export default function CheckoutForm() {
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
+        // receipt_email:{email},
         // TODO Make sure to change this to your payment completion page
-        return_url: "http://localhost:3000",
+        return_url: "http://localhost:3000/booking/result",
       },
     });
 
@@ -128,6 +122,7 @@ export default function CheckoutForm() {
           <PaymentElement id="payment-element" />
           <div className="checkout-form__actions">
             <Button
+              type="submit"
               variant="contained"
               disabled={isLoading || !stripe || !elements}
               id="submit"
@@ -147,4 +142,4 @@ export default function CheckoutForm() {
       </Card>
     </div>
   );
-}
+};
