@@ -37,12 +37,14 @@ export const Product = (props) => {
 
   const stepperButtons = [
     <Button
+      key="plus"
       aria-label="increase"
       value="1"
       onClick={handleIncreaseQuantity}>
       +
     </Button>,
     <Button
+      key="minus"
       aria-label="decrease"
       value="-1"
       onClick={handleDecreaseQuantity}
@@ -53,11 +55,15 @@ export const Product = (props) => {
 
   return (
     <Grid item xs={12} md={6} lg={4}>
-      {/* Style card https://material.io/components/cards */}
       <Card sx={{ p: "2rem" }}>
-        {/* TODO Add card media */}
-        {/* TODO Convert to card content */}
-        <Typography sx={{fontSize:'1.5rem', fontWeight:'bold', textTransform:'capitalize'}}>{name}</Typography>
+        <Typography
+          sx={{
+            fontSize: "1.5rem",
+            fontWeight: "bold",
+            textTransform: "capitalize",
+          }}>
+          {name}
+        </Typography>
         <Divider />
         <Typography sx={{ minHeight: "5rem", py: "1rem" }}>
           {description}
@@ -66,9 +72,9 @@ export const Product = (props) => {
           {price.toLocaleString("en-CA", {
             style: "currency",
             currency: "cad",
-          })}/pass
+          })}
+          /pass
         </Typography>
-        {/* TODO Card actions */}
         <div>
           <TextField value={quantity} onChange={handleQuantityChange} />
           <ButtonGroup
@@ -77,7 +83,7 @@ export const Product = (props) => {
             variant="contained"
             size="small"
             disableElevation
-            sx={{ml:"1rem"}}>
+            sx={{ ml: "1rem" }}>
             {stepperButtons}
           </ButtonGroup>
           <Divider textAlign="right" sx={{ mt: "2rem", mb: "1rem" }}>

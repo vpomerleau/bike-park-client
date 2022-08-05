@@ -17,7 +17,6 @@ import "./checkout-form.scss";
 
 export default function CheckoutForm() {
   const { user } = useAuth0();
-  console.log(user);
   const initialState = user ? user.email : "";
 
   const stripe = useStripe();

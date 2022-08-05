@@ -101,7 +101,7 @@ export const BookingForm = (props) => {
         {cart.map((item) => {
           return (
             item.quantity > 0 && (
-              <Typography align="right" sx={{ my: "1rem" }}>
+              <Typography key={item.id} align="right" sx={{ my: "1rem" }}>
                 {item.quantity} {item.name}
               </Typography>
             )
