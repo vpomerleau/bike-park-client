@@ -56,9 +56,9 @@ export const BookingForm = (props) => {
   };
 
   // TODO cart reset
-  const handleCartReset = (e) => {
-    e.preventDefault();
-  };
+  // const handleCartReset = (e) => {
+  //   e.preventDefault();
+  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -114,9 +114,9 @@ export const BookingForm = (props) => {
           })}
         </Typography>
         <div className="booking-form__actions">
-          <Button variant="outlined" onClick={handleCartReset}>
+          {/* <Button variant="outlined" onClick={handleCartReset}>
             Reset Cart
-          </Button>
+          </Button> */}
           <Button type="submit" variant="contained" disabled={isCartEmpty()}>
             Checkout
           </Button>

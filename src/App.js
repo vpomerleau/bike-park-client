@@ -39,7 +39,7 @@ export const App = () => {
         <Route path="/" exact component={HomePage} />
         <ProtectedRoute path="/profile" component={ProfilePage} />
         <Route path="/public" component={PublicPage} />
-        <Route exact path="/booking" component={BookingPage} />
+        <ProtectedRoute exact path="/booking" component={BookingPage} />
         <Route path="/booking/result" component={BookingResult} />
         <ProtectedRoute path="/protected" component={ProtectedPage} />
         <ProtectedRoute path="/admin" component={AdminPage} />
