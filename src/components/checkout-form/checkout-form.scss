@@ -1,6 +1,19 @@
 .checkout-form{
     &__container {
         margin-top:2rem;
+        padding: 2rem;
+        border-radius: 5px;
+        background-image:linear-gradient(to bottom right, rgba(255,255,255,0.4), rgba(255,255,255,0.2));
+        backdrop-filter: "blur(10px)";
+    }
+
+    &__wrapper {
+        margin-top:1rem;
         padding:1rem;
+    }
+
+    &__actions{
+        display:flex;
+        justify-content: flex-end;
     }
 }

@@ -83,7 +83,8 @@ export const BookingForm = (props) => {
   };
 
   return (
-    <Paper className="booking-form__container">
+    <div className="booking-form__container">
+      <Typography variant="h3" sx={{mb:'1rem'}}>Pass options</Typography>
       <form className="booking-form" onSubmit={handleSubmit}>
         <Grid container spacing={2}>
           {products.map((product) => {
@@ -97,13 +98,17 @@ export const BookingForm = (props) => {
           })}
         </Grid>
 
-        {cart.map(item=>{ return (
-          item.quantity>0 &&
-          <Typography align='right' sx={{my:'1rem'}}>{item.quantity} {item.name}</Typography>
-        );
+        {cart.map((item) => {
+          return (
+            item.quantity > 0 && (
+              <Typography align="right" sx={{ my: "1rem" }}>
+                {item.quantity} {item.name}
+              </Typography>
+            )
+          );
         })}
 
-        <Typography align='right' sx={{fontSize:'2rem', my:'2rem'}}>
+        <Typography align="right" sx={{ fontSize: "2rem", my: "2rem" }}>
           Total:
           {total.toLocaleString("en-CA", {
             style: "currency",
@@ -119,6 +124,6 @@ export const BookingForm = (props) => {
           </Button>
         </div>
       </form>
-    </Paper>
+    </div>
   );
 };

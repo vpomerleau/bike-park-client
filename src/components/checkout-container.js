@@ -10,7 +10,7 @@ import { Paper } from "@mui/material";
 // recreating the Stripe object on every render.
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_SECRET_TEST_KEY);
 
-export const CheckoutContainer = ({clientSecret}) => {
+export const CheckoutContainer = ({ clientSecret }) => {
   // const [clientSecret, setClientSecret] = useState("");
 
   // Create PaymentIntent as soon as the page loads
@@ -29,10 +29,10 @@ export const CheckoutContainer = ({clientSecret}) => {
 
   const appearance = {
     theme: "flat",
-    variables:{
-      fontFamily:'Roboto, Helvetica, Arial, sans-serif',
-      borderRadius:'2px'
-    }
+    variables: {
+      fontFamily: "Roboto, Helvetica, Arial, sans-serif",
+      borderRadius: "2px",
+    },
   };
   const options = {
     clientSecret,
@@ -40,12 +40,12 @@ export const CheckoutContainer = ({clientSecret}) => {
   };
 
   return (
-    <Paper>
+    <>
       {clientSecret && (
         <Elements options={options} stripe={stripePromise}>
           <CheckoutForm />
         </Elements>
       )}
-    </Paper>
+    </>
   );
 };
