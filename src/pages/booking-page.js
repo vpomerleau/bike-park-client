@@ -15,6 +15,7 @@ const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_SECRET_TEST_KEY);
 export const BookingPage = () => {
   const [clientSecret, setClientSecret] = useState("");
   const [paymentIntentId, setPaymentIntentId] = useState("");
+  const [verifiedTotal, setVerifiedTotal] = useState(null);
   const [stripeTransactionStatus, setStripeTransactionStatus] = useState("");
 
   const [cart, setCart] = useState([]);
@@ -41,6 +42,7 @@ export const BookingPage = () => {
           setPaymentIntentId={setPaymentIntentId}
           stripeTransactionStatus={stripeTransactionStatus}
           setStripeTransactionStatus={setStripeTransactionStatus}
+          setVerifiedTotal={setVerifiedTotal}
           cart={cart}
           setCart={setCart}
           total={total}
@@ -51,7 +53,7 @@ export const BookingPage = () => {
             <CheckoutForm
               clientSecret={clientSecret}
               cart={cart}
-              total={total}
+              verifiedTotal={verifiedTotal}
             />
           </Elements>
         )}

@@ -103,7 +103,7 @@ export const CheckoutForm = (props) => {
                 {isLoading ? (
                   <div className="spinner" id="spinner"></div>
                 ) : (
-                  "Pay now"
+                  `Pay ${props.verifiedTotal} now`
                 )}
               </span>
             </Button>

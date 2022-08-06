@@ -182,6 +182,14 @@ export const BookingForm = (props) => {
         props.setClientSecret(res.data.clientSecret);
         props.setPaymentIntentId(res.data.paymentIntentId);
         props.setStripeTransactionStatus(res.data.transactionStatus);
+        
+        // Convert from cents to dollars and format to canadian currency
+        const formattedTotal = (res.data.calculatedAmount/100).toLocaleString("en-CA", {
+          style: "currency",
+          currency: "cad",
+        });
+
+        props.setVerifiedTotal(formattedTotal);
       })
       .catch((err) => console.log(err));
   };
