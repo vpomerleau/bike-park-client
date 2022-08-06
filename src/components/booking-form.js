@@ -11,12 +11,6 @@ const serverURL = process.env.REACT_APP_API_SERVER_URL;
 
 export const BookingForm = (props) => {
   const [products, setProducts] = useState([]);
-  const [riders, setRiders] = useState([]);
-  const [riderId, setRiderId] = useState();
-  const [paymentIntentCreated, setPaymentIntentCreated] = useState(false);
-  const [transactionRecorded, setTransactionRecorded] = useState();
-
-  const { user } = useAuth0();
 
   const getAllProducts = () => {
     axios
@@ -35,113 +29,6 @@ export const BookingForm = (props) => {
   useEffect(() => {
     getAllProducts();
   }, []);
-
-  // TODO move transaction and rider log to payment success page
-
-  // const getAllRiders = () => {
-  //   axios
-  //     .get(`${serverURL}/riders`)
-  //     .then((res) => {
-  //       setRiders(res.data);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
-
-  // Get list of all riders from database on first load
-  // useEffect(() => {
-  //   getAllRiders();
-  // }, []);
-
-  // Get riderId of currently logged in user, after list of users is obtained from the server
-  // useEffect(() => {
-  //   if (riders.length > 0) {
-  //     getRiderId();
-  //   }
-  // }, [riders]);
-
-  // const getRiderId = () => {
-  //   let rider = riders.filter((rider) => rider.email === user.email);
-
-  //   if (rider.length === 0) {
-  //     createRiderProfile();
-  //     rider = riders.filter((rider) => rider.email === user.email);
-  //   }
-  //   setRiderId(rider[0].id);
-  // };
-
-  // // Create a database record for the logged in user
-  // const createRiderProfile = () => {
-  //   const body = JSON.stringify({
-  //     email: user.email,
-  //     first_name: user.given_name,
-  //     last_name: user.family_name,
-  //   });
-  //   axios
-  //     .post(`${serverURL}/riders`, body, {
-  //       headers: { "Content-Type": "application/json" },
-  //     })
-  //     .then((res) => {
-  //       console.log(res.data);
-  //       getAllRiders();
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
-
-  // const checkIfTransactionRecorded = (id) => {
-  //   axios
-  //     .get(`${serverURL}/transaction/${id}`)
-  //     .then((res) => {
-  //       console.log(res.data);
-  //       if (res.data.length > 0) {
-  //         setTransactionRecorded(true);
-  //         console.log(transactionRecorded);
-  //       } else {
-  //         setTransactionRecorded(false);
-  //         console.log(transactionRecorded);
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
-
-  // const createTransactionRecord = () => {
-  //   const body = JSON.stringify({
-  //     stripe_payment_id: props.paymentIntentId,
-  //     transaction_status: props.stripeTransactionStatus,
-  //     rider_id: riderId,
-  //   });
-
-  //   axios
-  //     .post(`${serverURL}/transaction`, body, {
-  //       headers: { "Content-Type": "application/json" },
-  //     })
-  //     .then((res) => {
-  //       console.log(res.data);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
-
-  // useEffect(() => {
-  //   if (props.paymentIntentId.lenth>0) {
-  //     checkIfTransactionRecorded(props.paymentIntentId);
-  //   }
-  // }, [props.paymentIntentId]);
-
-  // useEffect(() => {
-  //   if ((props.paymentIntentId.length>0) && !transactionRecorded) {
-  //     createTransactionRecord();
-  //   }
-  // }, [transactionRecorded]);
-
-  // record transaction and products from 
-  // const logRiderProducts = () => {};
 
   const isCartEmpty = () => {
     const emptyCart =
@@ -201,16 +88,7 @@ export const BookingForm = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // Send payment intent to Stripe
-    // returns client secret and payment intent id
     createPaymentIntent();
-
-    // Add transaction to transactions table
-
-    // createTransactionRecord();
-
-    // Add purchased producted to rider_products table
   };
 
   return (
