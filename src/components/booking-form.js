@@ -34,6 +34,17 @@ export const BookingForm = (props) => {
     getAllProducts();
   }, []);
 
+  const getAllRiders = () => {
+    axios
+      .get(`${serverURL}/riders`)
+      .then((res) => {
+        setRiders(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   // Get list of all riders from database on first load
   useEffect(() => {
     getAllRiders();
@@ -45,6 +56,66 @@ export const BookingForm = (props) => {
       getRiderId();
     }
   }, [riders]);
+
+  const findRiderByEmail = () => {
+    return riders.filter((rider) => rider.email === user.email);
+  };
+
+  const getRiderId = () => {
+    let rider = findRiderByEmail();
+    if (rider.length === 0) {
+      createRiderProfile();
+      rider = findRiderByEmail();
+    }
+    setRiderId(rider[0].id);
+  };
+
+  // Create a database record for the logged in user
+  const createRiderProfile = () => {
+    const body = JSON.stringify({
+      email: user.email,
+      first_name: user.given_name,
+      last_name: user.family_name,
+    });
+    axios
+      .post(`${serverURL}/riders`, body, {
+        headers: { "Content-Type": "application/json" },
+      })
+      .then((res) => {
+        console.log(res.data);
+        getAllRiders();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const createTransactionRecord = () => {
+    const body = JSON.stringify({
+      stripe_payment_id: props.paymentIntentId,
+      transaction_status: props.stripeTransactionStatus,
+      rider_id: riderId,
+    });
+
+    axios
+      .post(`${serverURL}/transaction`, body, {
+        headers: { "Content-Type": "application/json" },
+      })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    if (props.stripeTransactionStatus) {
+      createTransactionRecord();
+    }
+  }, [props.stripeTransactionStatus]);
+
+  const logRiderProducts = () => {};
 
   const isCartEmpty = () => {
     const emptyCart =
@@ -84,56 +155,10 @@ export const BookingForm = (props) => {
       .then((res) => {
         props.setClientSecret(res.data.clientSecret);
         props.setPaymentIntentId(res.data.paymentIntentId);
+        props.setStripeTransactionStatus(res.data.transactionStatus);
       })
       .catch((err) => console.log(err));
   };
-
-  const getAllRiders = () => {
-    axios
-      .get(`${serverURL}/riders`)
-      .then((res) => {
-        setRiders(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  const findRiderByEmail = () => {
-    return riders.filter((rider) => rider.email === user.email);
-  };
-
-  const getRiderId = () => {
-    let rider = findRiderByEmail();
-    if (rider.length === 0) {
-      createRiderProfile();
-      rider = findRiderByEmail();
-    }
-    setRiderId(rider[0].id);
-  };
-
-  const createRiderProfile = () => {
-    const body = JSON.stringify({
-      email: user.email,
-      first_name: user.given_name,
-      last_name: user.family_name,
-    });
-    axios
-      .post(`${serverURL}/riders`, body, {
-        headers: { "Content-Type": "application/json" },
-      })
-      .then((res) => {
-        console.log(res.data);
-        getAllRiders();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  const createTransactionRecord = () => {};
-
-  const logRiderProducts = () => {};
 
   // TODO cart reset
   // const handleCartReset = (e) => {
@@ -146,9 +171,10 @@ export const BookingForm = (props) => {
     // Send payment intent to Stripe
     // returns client secret and payment intent id
     createPaymentIntent();
-    console.log(riderId);
 
     // Add transaction to transactions table
+
+    // createTransactionRecord();
 
     // Add purchased producted to rider_products table
   };
