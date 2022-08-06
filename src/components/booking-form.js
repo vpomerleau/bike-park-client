@@ -11,6 +11,8 @@ const serverURL = process.env.REACT_APP_API_SERVER_URL;
 
 export const BookingForm = (props) => {
   const [products, setProducts] = useState([]);
+  const [riders, setRiders] = useState([]);
+  const [riderId, setRiderId] = useState();
 
   const { user } = useAuth0();
 
@@ -31,6 +33,18 @@ export const BookingForm = (props) => {
   useEffect(() => {
     getAllProducts();
   }, []);
+
+  // Get list of all riders from database on first load
+  useEffect(() => {
+    getAllRiders();
+  }, []);
+
+  // Get riderId of currently logged in user, after list of users in obtained from the server
+  useEffect(() => {
+    if (riders.length > 0) {
+      getRiderId();
+    }
+  }, [riders]);
 
   const isCartEmpty = () => {
     const emptyCart =
@@ -64,31 +78,62 @@ export const BookingForm = (props) => {
     const cartDetails = JSON.stringify(props.cart);
 
     axios
-      .post(
-        `${process.env.REACT_APP_API_SERVER_URL}/stripe/create-payment-intent`,
-        cartDetails,
-        {
-          headers: { "Content-Type": "application/json" },
-        }
-      )
+      .post(`${serverURL}/stripe/create-payment-intent`, cartDetails, {
+        headers: { "Content-Type": "application/json" },
+      })
       .then((res) => {
         props.setClientSecret(res.data.clientSecret);
         props.setPaymentIntentId(res.data.paymentIntentId);
       })
       .catch((err) => console.log(err));
-  }
+  };
 
-  const getRiderId =() => {
+  const getAllRiders = () => {
+    axios
+      .get(`${serverURL}/riders`)
+      .then((res) => {
+        setRiders(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
-  }
+  const findRiderByEmail = () => {
+    return riders.filter((rider) => rider.email === user.email);
+  };
 
-  const createTransactionRecord =() =>{
+  const getRiderId = () => {
+    let rider = findRiderByEmail();
+    if (rider.length === 0) {
+      createRiderProfile();
+      rider = findRiderByEmail();
+    }
+    setRiderId(rider[0].id);
+  };
 
-  }
+  const createRiderProfile = () => {
+    const body = JSON.stringify({
+      email: user.email,
+      first_name: user.given_name,
+      last_name: user.family_name,
+    });
+    axios
+      .post(`${serverURL}/riders`, body, {
+        headers: { "Content-Type": "application/json" },
+      })
+      .then((res) => {
+        console.log(res.data);
+        getAllRiders();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
-  const logRiderProducts = () => {
+  const createTransactionRecord = () => {};
 
-  }
+  const logRiderProducts = () => {};
 
   // TODO cart reset
   // const handleCartReset = (e) => {
@@ -101,17 +146,18 @@ export const BookingForm = (props) => {
     // Send payment intent to Stripe
     // returns client secret and payment intent id
     createPaymentIntent();
+    console.log(riderId);
 
     // Add transaction to transactions table
 
     // Add purchased producted to rider_products table
-
-
   };
 
   return (
     <div className="booking-form__container">
-      <Typography variant="h3" sx={{mb:'1rem'}}>Pass options</Typography>
+      <Typography variant="h3" sx={{ mb: "1rem" }}>
+        Pass options
+      </Typography>
       <form className="booking-form" onSubmit={handleSubmit}>
         <Grid container spacing={2}>
           {products.map((product) => {
