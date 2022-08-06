@@ -50,22 +50,19 @@ export const BookingForm = (props) => {
     getAllRiders();
   }, []);
 
-  // Get riderId of currently logged in user, after list of users in obtained from the server
+  // Get riderId of currently logged in user, after list of users is obtained from the server
   useEffect(() => {
     if (riders.length > 0) {
       getRiderId();
     }
   }, [riders]);
 
-  const findRiderByEmail = () => {
-    return riders.filter((rider) => rider.email === user.email);
-  };
-
   const getRiderId = () => {
-    let rider = findRiderByEmail();
+    let rider  = riders.filter((rider) => rider.email === user.email);
+
     if (rider.length === 0) {
       createRiderProfile();
-      rider = findRiderByEmail();
+      rider = riders.filter((rider) => rider.email === user.email);
     }
     setRiderId(rider[0].id);
   };
