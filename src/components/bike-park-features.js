@@ -1,6 +1,7 @@
 import React from "react";
 import { BikeParkFeature } from "./bike-park-feature";
 import "./bike-park-features.scss";
+import { PageLoader } from "./page-loader";
 
 export const BikeParkFeatures = () => {
   const featuresList = [
@@ -53,6 +54,9 @@ export const BikeParkFeatures = () => {
             icon="fa-solid fa-bicycle"
           />
         ))}
+      </div>
+      <div className="bike__container">
+        <PageLoader />
       </div>
     </div>
   );

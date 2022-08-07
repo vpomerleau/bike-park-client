@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
+import { Typography } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import { PageLayout } from "../page-layout";
-import "./booking-result.scss";
 import { PageLoader } from "../page-loader";
+import "./booking-result.scss";
 
 const serverURL = process.env.REACT_APP_API_SERVER_URL;
 
@@ -82,8 +83,8 @@ export const BookingResult = () => {
     Array.from(cartData).map((item) => {
       const riderProductId = `${transactionId}-${item.id}`;
       const body = JSON.stringify({
-        id:riderProductId,
-        transaction_id:transactionId,
+        id: riderProductId,
+        transaction_id: transactionId,
         rider_id: riderId,
         product_id: item.id,
         quantity: item.quantity,
@@ -133,13 +134,15 @@ export const BookingResult = () => {
   return (
     <PageLayout>
       <div className="booking-result__container">
-        {/* show loader - payment processing */}
-        {clientSecret && (
-          <div id="payment-message">
-            Please wait... your confirmation will be displayed shortly!
-          </div>
+        {!transactionId && (
+          <>
+            <Typography variant="h2" component="p">
+              Loading...
+            </Typography>
+            <PageLoader />
+          </>
         )}
-        <PageLoader />
+        {transactionId && <></>}
       </div>
     </PageLayout>
   );

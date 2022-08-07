@@ -14,3 +14,31 @@
     gap: 2rem;
   }
 }
+
+.bike {
+  animation: upDown 750ms alternate infinite ease-in-out;
+
+  &__container {
+    display:block;
+    width:100vw;
+    height:600px;
+    margin-left:'-90vw';
+    margin-bottom:5rem;
+    animation: rightLeft 4s infinite linear;
+  }
+}
+
+@keyframes upDown {
+  to {
+    transform: translatey(100px);
+  }
+}
+
+@keyframes rightLeft {
+  from {
+    transform: translate(-100%,0);
+  }
+  to {
+    transform: translate(110%, 0);
+  }
+}

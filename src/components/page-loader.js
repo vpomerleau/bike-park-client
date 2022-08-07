@@ -1,10 +1,10 @@
 import React from "react";
+import { Typography } from "@mui/material";
 import "./page-loader.scss";
 
 export const PageLoader = () => {
   return (
     <div className="loader">
-      Loading...
       {/* Loading animation modified from https://codepen.io/lucawater/pen/VwQVyj */}
       {/* Illustration inspiration by Dennis de Groot */}
       <div className="bike">
