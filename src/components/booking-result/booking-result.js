@@ -12,7 +12,7 @@ export const BookingResult = () => {
   const [paymentData, setPaymentData] = useState();
   const [runTimes, setRunTimes] = useState(0);
   const [riderId, setRiderId] = useState();
-  const[transactionId, setTransactionId] = useState();
+  const [transactionId, setTransactionId] = useState();
 
   const searchParams = useLocation().search;
   const paymentIntentId = new URLSearchParams(searchParams).get(
@@ -21,7 +21,7 @@ export const BookingResult = () => {
   const clientSecret = new URLSearchParams(searchParams).get(
     "payment_intent_client_secret"
   );
-  const status = new URLSearchParams(searchParams).get("redirect_status");
+  // const status = new URLSearchParams(searchParams).get("redirect_status");
 
   // retrieve payment intent data from stripe
   useEffect(() => {
@@ -34,7 +34,7 @@ export const BookingResult = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [paymentIntentId]);
 
   // Create a new rider from the login details
   const createRiderProfile = () => {
@@ -75,6 +75,38 @@ export const BookingResult = () => {
       });
   };
 
+  const createRiderProductRecords = () => {
+    const cartData = JSON.parse(paymentData.metadata.cart);
+
+    Array.from(cartData).map((item) => {
+      const riderProductId = `${transactionId}-${item.id}`;
+      const body = JSON.stringify({
+        id:riderProductId,
+        transaction_id:transactionId,
+        rider_id: riderId,
+        product_id: item.id,
+        quantity: item.quantity,
+      });
+
+      console.log(body);
+
+      axios
+        .post(`${serverURL}/rider-product`, body, {
+          headers: { "Content-Type": "application/json" },
+        })
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+
+      return "completed";
+    });
+  };
+
+  // Add cart
+
   if (runTimes === 0 && paymentData) {
     setRunTimes(1);
     createRiderProfile();
@@ -85,7 +117,7 @@ export const BookingResult = () => {
   }
 
   if (transactionId) {
-    console.log(`transaction logged in row ${transactionId}`)
+    createRiderProductRecords();
   }
 
   // log transaction in database
