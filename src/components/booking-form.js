@@ -40,21 +40,26 @@ export const BookingForm = (props) => {
   const updateCart = (cartItem) => {
     const itemInCart = props.cart.find(({ id }) => id === cartItem.id);
     if (!itemInCart) {
-      props.setCart([...props.cart, cartItem]);
-      props.setTotal(props.total + cartItem.quantity * cartItem.price);
+      if (cartItem.quantity > 0) {
+        props.setCart([...props.cart, cartItem]);
+        props.setTotal(props.total + cartItem.quantity * cartItem.price);
+      }
     } else {
       const newItems = props.cart.map((item) => {
+        // if the cart item has been updated
         if (cartItem.id === item.id) {
-          if (cartItem.quantity < item.quantity) {
-            props.setTotal(props.total - cartItem.price);
-          } else if (cartItem.quantity > item.quantity) {
-            props.setTotal(props.total + cartItem.price);
-          }
+          const quantityChange = cartItem.quantity - item.quantity;
+          // adjust total price to account for change in cart
+          props.setTotal(props.total + cartItem.price * quantityChange);
+          // include the updated item only if the quantity is > 0
           return { ...cartItem };
-        }
-        return item;
+        } // leave unchanged item as they were and return them to the cart
+        else return item;
       });
-      props.setCart(newItems);
+      const filteredItems = newItems.filter((item) => {
+        return item.quantity > 0;
+      });
+      props.setCart(filteredItems);
     }
   };
 
@@ -69,12 +74,15 @@ export const BookingForm = (props) => {
         props.setClientSecret(res.data.clientSecret);
         props.setPaymentIntentId(res.data.paymentIntentId);
         props.setStripeTransactionStatus(res.data.transactionStatus);
-        
+
         // Convert from cents to dollars and format to canadian currency
-        const formattedTotal = (res.data.calculatedAmount/100).toLocaleString("en-CA", {
-          style: "currency",
-          currency: "cad",
-        });
+        const formattedTotal = (res.data.calculatedAmount / 100).toLocaleString(
+          "en-CA",
+          {
+            style: "currency",
+            currency: "cad",
+          }
+        );
 
         props.setVerifiedTotal(formattedTotal);
       })
@@ -109,15 +117,14 @@ export const BookingForm = (props) => {
           })}
         </Grid>
 
-        {props.cart.map((item) => {
-          return (
-            item.quantity > 0 && (
+        {props.cart &&
+          props.cart.map((item) => {
+            return (
               <Typography key={item.id} align="right" sx={{ my: "1rem" }}>
                 {item.quantity} {item.name}
               </Typography>
-            )
-          );
-        })}
+            );
+          })}
 
         <Typography align="right" sx={{ fontSize: "2rem", my: "2rem" }}>
           Total:
