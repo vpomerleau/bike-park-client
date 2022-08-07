@@ -57,29 +57,22 @@
 # Table of Contents
 
 - [About the Project](#about-the-project)
-  <!-- * [Screenshots](#screenshots) -->
+  * [Screenshots](#screenshots)
   * [Dependencies](#dependencies)
-  <!-- * [Features](#features) -->
+  * [Features](#features)
   * [Color Reference](#color-reference)
   * [Environment Variables](#environment-variables)
 - [Getting Started](#getting-started)
   * [Prerequisites](#prerequisites)
-  <!-- * [Installation](#installation)
-  * [Running Tests](#running-tests) -->
   * [Run Locally](#run-locally)
-  <!-- * [Deployment](#deployment) -->
-<!-- - [Usage](#usage) -->
 - [Roadmap](#roadmap)
-<!-- - [Contributing](#contributing)
-  * [Code of Conduct](#code-of-conduct)
-- [FAQ](#faq) -->
 - [License](#license)
 - [Contact](#contact)
 - [Acknowledgements](#acknowledgements)
   
 
 <!-- About the Project -->
-## About the Project
+# About the Project
 
 
 <!-- Screenshots -->
@@ -91,7 +84,7 @@
 
 
 <!-- Dependencies -->
-### Dependencies
+## Dependencies
 
 <details>
   <summary>Client</summary>
@@ -120,13 +113,13 @@
 </details>
 
 <!-- Features -->
-### Features
+## Features
 
 - Authentication with Auth0
 - Payments with Stripe
 
 <!-- Color Reference -->
-### Color Reference
+## Color Reference
 
 | Color             | Hex                                                                |
 | ----------------- | ------------------------------------------------------------------ |
@@ -138,7 +131,7 @@
 
 
 <!-- Env Variables -->
-### Environment Variables
+## Environment Variables
 
 To run this project, you will need to add the following environment variables to your .env file
 
@@ -155,10 +148,10 @@ To run this project, you will need to add the following environment variables to
 `STRIPE_PUBLISHABLE_KEY`
 
 <!-- Getting Started -->
-## Getting Started
+# Getting Started
 
 <!-- Prerequisites -->
-### Prerequisites
+## Prerequisites
 
 This project uses Node as package manager 
 
@@ -188,7 +181,7 @@ To run tests, run the following command
 ``` -->
 
 <!-- Run Locally -->
-### Install a local copy of the project
+## Install a local copy of the project
 
 Make a top level project directory to hold the client and server-side code
 
@@ -207,7 +200,7 @@ Clone the client and server into the top level folder (two new folders will be c
   git clone https://github.com/vpomerleau/bike-park-server.git
 ```
 
-### Client setup
+## Client setup
 
 [See Server-side readme](https://github.com/vpomerleau/bike-park-server/blob/develop/README.md) for detailed server installation instructions.
 
@@ -250,7 +243,7 @@ To deploy this project run
 Use this space to tell a little more about your project and how it can be used. Show additional screenshots, code samples, demos or link to other resources. -->
 
 <!-- Roadmap -->
-## Roadmap
+# Roadmap
 
 * [x] Proof of concept homepage
 * [x] Auth0 integration (dev mode)
@@ -289,12 +282,16 @@ Valerie Pomerleau - [Twitter @PomerleauVal](https://twitter.com/PomerleauVal) - 
 
 # Acknowledgements
 
+Thank you to BrainStation for the knowledge, wisdom and support! In particular, I'd like to thank my May 2022 Web Dev cohort's educators ([Daniil Molodkov](https://daniil.ca), [Michael Ti](https://michaelti.ca/), [Andrew Carolan](https://github.com/andrewcarolan)) and TAs ([Brishan King](https://github.com/brishan3) and [Slobodan Zaja](https://github.com/brunash)).
+
+## Useful resources 
+
  - Bike Lorem Ipsum from [Bicycle Ipsum](https://cogdog.github.io/bicycle-ipsum/)
  - Logo design with [Canva](https://www.canva.com/)
+ - Mountain bike animation adapted from: [Pure CSS bike animation](https://codepen.io/lucawater/pen/VwQVyj)
  - Database schema planning with [LucidChart](https://lucid.app/lucidchart/5ad69e98-8a23-448b-a979-63d8dca1a07b/edit?viewport_loc=-515%2C-100%2C2616%2C1481%2C0_0&invitationId=inv_a0392367-744c-4dc4-97de-515ca6583dd1#)
  - [Auth0 API docs](https://auth0.com/docs/)
  - [Stripe API docs](https://stripe.com/docs/api)
  - [Stripe Dev Support on Discord](https://discord.com/invite/stripe)
  - [Shields.io](https://shields.io/)
  - [Awesome README template](https://github.com/Louis3797/awesome-readme-template)
- - Mountain bike animation adapted from: [Pure CSS bike animation](https://codepen.io/lucawater/pen/VwQVyj)
