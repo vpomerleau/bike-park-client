@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
-import { Typography } from "@mui/material";
-import { useLocation } from "react-router-dom";
+import { Alert, Button, Typography } from "@mui/material";
+import { useLocation, useHistory } from "react-router-dom";
 import { PageLayout } from "../page-layout";
 import { PageLoader } from "../page-loader";
 import "./booking-result.scss";
@@ -11,10 +11,12 @@ const serverURL = process.env.REACT_APP_API_SERVER_URL;
 
 export const BookingResult = () => {
   const { user } = useAuth0();
+  const history = useHistory();
   const [paymentData, setPaymentData] = useState();
   const [runTimes, setRunTimes] = useState(0);
   const [riderId, setRiderId] = useState();
   const [transactionId, setTransactionId] = useState();
+  const [riderProductCreated, setRiderProductCreated] = useState(false);
 
   const searchParams = useLocation().search;
   const paymentIntentId = new URLSearchParams(searchParams).get(
@@ -97,17 +99,13 @@ export const BookingResult = () => {
           headers: { "Content-Type": "application/json" },
         })
         .then((res) => {
-          console.log(res.data);
+          setRiderProductCreated(true);
         })
         .catch((err) => {
           console.log(err);
         });
-
-      return "completed";
     });
   };
-
-  // Add cart
 
   if (runTimes === 0 && paymentData) {
     setRunTimes(1);
@@ -122,14 +120,9 @@ export const BookingResult = () => {
     createRiderProductRecords();
   }
 
-  // log transaction in database
-  // log rider products in database
-
-  // redirect to purchase confirmation page
-
-  // on purchase confirmation page
-  // show products purchased
-  // provide link to view/manage bookings
+  const handleRedirectToProfile = () => {
+    history.push("/profile");
+  };
 
   return (
     <PageLayout>
@@ -139,10 +132,34 @@ export const BookingResult = () => {
             <Typography variant="h2" component="p">
               Loading...
             </Typography>
-            <PageLoader />
           </>
         )}
-        {transactionId && <></>}
+        {riderId && (
+          <Alert severity="success" sx={{ mb: "1rem" }} onClose={() => {}}>
+            Rider profile created
+          </Alert>
+        )}
+        {transactionId && (
+          <Alert severity="success" sx={{ mb: "1rem" }} onClose={() => {}}>
+            Transaction recorded
+          </Alert>
+        )}
+        {riderProductCreated && (
+          <Alert
+            variant="filled"
+            severity="success"
+            action={
+              <Button
+                color="inherit"
+                size="small"
+                onClick={handleRedirectToProfile}>
+                Go to profile
+              </Button>
+            }>
+            Tickets saved to your rider profile
+          </Alert>
+        )}
+        <PageLoader />
       </div>
     </PageLayout>
   );
