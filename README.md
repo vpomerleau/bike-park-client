@@ -3,20 +3,16 @@
     <img src="src/assets/logos/wbp-color-vertical-white-text.svg#gh-dark-mode-only" alt="logo" width="200" height="auto" />
   <h1>Woodwork Bike Park Management System</h1>
   
-  <p>
-    Project in progress - phase 1 
-  </p>
-  
   
 <!-- Badges -->
 <p>
-  <a href="https://github.com/vpomerleau/bike-park-client/graphs/contributors">
+  <!-- <a href="https://github.com/vpomerleau/bike-park-client/graphs/contributors">
     <img src="https://img.shields.io/github/contributors/vpomerleau/bike-park-client" alt="contributors" />
-  </a>
+  </a> -->
   <a href="">
     <img src="https://img.shields.io/github/last-commit/vpomerleau/bike-park-client" alt="last update" />
   </a>
-  <a href="https://github.com/vpomerleau/bike-park-client/network/members">
+  <!-- <a href="https://github.com/vpomerleau/bike-park-client/network/members">
     <img src="https://img.shields.io/github/forks/vpomerleau/bike-park-client" alt="forks" />
   </a>
   <a href="https://github.com/vpomerleau/bike-park-client/stargazers">
@@ -24,22 +20,36 @@
   </a>
   <a href="https://github.com/vpomerleau/bike-park-client/issues/">
     <img src="https://img.shields.io/github/issues/vpomerleau/bike-park-client" alt="open issues" />
-  </a>
+  </a> -->
   <a href="https://github.com/vpomerleau/bike-park-client/blob/master/LICENSE">
     <img src="https://img.shields.io/github/license/vpomerleau/bike-park-client" alt="license" />
   </a>
 </p>
-   
+
 <h4>
-    <a href="https://github.com/Louis3797/awesome-readme-template/">View Demo</a>
+    <!-- <a href="https://github.com/Louis3797/awesome-readme-template/">View Demo</a>
   <span> · </span>
     <a href="https://github.com/Louis3797/awesome-readme-template">Documentation</a>
+  <span> · </span> -->
+    <a href="https://github.com/vpomerleau/bike-park-client/issues/">Report Bug</a>
   <span> · </span>
-    <a href="https://github.com/Louis3797/awesome-readme-template/issues/">Report Bug</a>
-  <span> · </span>
-    <a href="https://github.com/Louis3797/awesome-readme-template/issues/">Request Feature</a>
+    <a href="https://github.com/vpomerleau/bike-park-client/issues/">Request Feature</a>
   </h4>
+
 </div>
+
+<br />
+
+# Client-side Repository
+
+<a href="https://github.com/vpomerleau/bike-park-client">
+  <p>https://github.com/vpomerleau/bike-park-client</p>
+</a>
+
+# Server-side Repository
+<a href="https://github.com/vpomerleau/bike-park-server">
+  <p>https://github.com/vpomerleau/bike-park-server</p>
+</a>
 
 <br />
 
@@ -47,22 +57,22 @@
 # Table of Contents
 
 - [About the Project](#about-the-project)
-  * [Screenshots](#screenshots)
-  * [Tech Stack](#tech-stack)
-  * [Features](#features)
+  <!-- * [Screenshots](#screenshots) -->
+  * [Dependencies](#dependencies)
+  <!-- * [Features](#features) -->
   * [Color Reference](#color-reference)
   * [Environment Variables](#environment-variables)
 - [Getting Started](#getting-started)
   * [Prerequisites](#prerequisites)
-  * [Installation](#installation)
-  * [Running Tests](#running-tests)
+  <!-- * [Installation](#installation)
+  * [Running Tests](#running-tests) -->
   * [Run Locally](#run-locally)
-  * [Deployment](#deployment)
-- [Usage](#usage)
+  <!-- * [Deployment](#deployment) -->
+<!-- - [Usage](#usage) -->
 - [Roadmap](#roadmap)
-- [Contributing](#contributing)
+<!-- - [Contributing](#contributing)
   * [Code of Conduct](#code-of-conduct)
-- [FAQ](#faq)
+- [FAQ](#faq) -->
 - [License](#license)
 - [Contact](#contact)
 - [Acknowledgements](#acknowledgements)
@@ -80,30 +90,25 @@
 </div>
 
 
-<!-- TechStack -->
-### Tech Stack
+<!-- Dependencies -->
+### Dependencies
 
 <details>
   <summary>Client</summary>
   <ul>
-    <li><a href="https://www.typescriptlang.org/">Typescript</a></li>
-    <li><a href="https://nextjs.org/">Next.js</a></li>
     <li><a href="https://reactjs.org/">React.js</a></li>
-    <li><a href="https://tailwindcss.com/">TailwindCSS</a></li>
+    <li><a href="https://sass-lang.com/">Sass</a></li>
+    <li><a href="https://axios-http.com/">Axios</a></li>
+    <li><a href="https://auth0.com/">Auth0</a></li>
+    <li><a href="https://stripe.com/en-ca">Stripe</a></li>
   </ul>
 </details>
 
 <details>
   <summary>Server</summary>
   <ul>
-    <li><a href="https://www.typescriptlang.org/">Typescript</a></li>
     <li><a href="https://expressjs.com/">Express.js</a></li>
-    <li><a href="https://go.dev/">Golang</a></li>
-    <li><a href="https://nestjs.com/">Nest.js</a></li>
-    <li><a href="https://socket.io/">SocketIO</a></li>
-    <li><a href="https://www.prisma.io/">Prisma</a></li>    
-    <li><a href="https://www.apollographql.com/">Apollo</a></li>
-    <li><a href="https://graphql.org/">GraphQL</a></li>
+    <li><a href="https://knexjs.org/">Knex.js</a></li>
   </ul>
 </details>
 
@@ -111,38 +116,25 @@
 <summary>Database</summary>
   <ul>
     <li><a href="https://www.mysql.com/">MySQL</a></li>
-    <li><a href="https://www.postgresql.org/">PostgreSQL</a></li>
-    <li><a href="https://redis.io/">Redis</a></li>
-    <li><a href="https://neo4j.com/">Neo4j</a></li>
-    <li><a href="https://www.mongodb.com/">MongoDB</a></li>
-  </ul>
-</details>
-
-<details>
-<summary>DevOps</summary>
-  <ul>
-    <li><a href="https://www.docker.com/">Docker</a></li>
-    <li><a href="https://www.jenkins.io/">Jenkins</a></li>
-    <li><a href="https://circleci.com/">CircleCLI</a></li>
   </ul>
 </details>
 
 <!-- Features -->
 ### Features
 
-- Feature 1
-- Feature 2
-- Feature 3
+- Authentication with Auth0
+- Payments with Stripe
 
 <!-- Color Reference -->
 ### Color Reference
 
 | Color             | Hex                                                                |
 | ----------------- | ------------------------------------------------------------------ |
-| Primary Color | ![#222831](https://via.placeholder.com/10/222831?text=+) #222831 |
-| Secondary Color | ![#393E46](https://via.placeholder.com/10/393E46?text=+) #393E46 |
-| Accent Color | ![#00ADB5](https://via.placeholder.com/10/00ADB5?text=+) #00ADB5 |
-| Text Color | ![#EEEEEE](https://via.placeholder.com/10/EEEEEE?text=+) #EEEEEE |
+| Brand Color (light) | ![#D67A00](https://via.placeholder.com/10/D67A00?text=+) #D67A00 |
+| Brand Color (dark) | ![#EBA13F](https://via.placeholder.com/10/EBA13F?text=+) #EBA13F |
+| Accent Color | ![#2e845d](https://via.placeholder.com/10/2e845d?text=+) #2e845d |
+| Text Color (on dark) | ![#FFFFFF](https://via.placeholder.com/10/FFFFFF?text=+) #FFFFFF |
+| Text Color (on white) | ![#000000](https://via.placeholder.com/10/#000000?text=+) #000000 |
 
 
 <!-- Env Variables -->
@@ -150,9 +142,17 @@
 
 To run this project, you will need to add the following environment variables to your .env file
 
-`API_KEY`
+`API_SERVER_URL`
 
-`ANOTHER_API_KEY`
+`AUTH0_DOMAIN`
+
+`AUTH0_CLIENT_ID`
+
+`AUTH0_CALLBACK_URL`
+
+`AUTH0_LOGOUT_RETURN_URL`
+
+`STRIPE_PUBLISHABLE_KEY`
 
 <!-- Getting Started -->
 ## Getting Started
@@ -160,109 +160,108 @@ To run this project, you will need to add the following environment variables to
 <!-- Prerequisites -->
 ### Prerequisites
 
-This project uses Yarn as package manager
+This project uses Node as package manager 
+
+[See Node intallation instructions](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 
 ```bash
- npm install --global yarn
+ npm install -g npm
 ```
 
 <!-- Installation -->
-### Installation
+<!-- ### Installation
 
-Install my-project with npm
+Install bike-park-client with npm
 
 ```bash
   yarn install my-project
   cd my-project
-```
+``` -->
    
 <!-- Running Tests -->
-### Running Tests
+<!-- ### Running Tests
 
 To run tests, run the following command
 
 ```bash
   yarn test test
-```
+``` -->
 
 <!-- Run Locally -->
-### Run Locally
+### Install a local copy of the project
 
-Clone the project
+Make a top level project directory to hold the client and server-side code
+
+ ```bash
+  mkdir bike-park-project
+  cd bike-park-project
+ ```
+
+Clone the client and server into the top level folder (two new folders will be created)
 
 ```bash
-  git clone https://github.com/Louis3797/awesome-readme-template.git
+  git clone https://github.com/vpomerleau/bike-park-client.git
+  ```
+
+```bash
+  git clone https://github.com/vpomerleau/bike-park-server.git
 ```
 
-Go to the project directory
+### Client setup
+
+[See Server-side readme](https://github.com/vpomerleau/bike-park-server/blob/develop/README.md) for detailed server installation instructions.
+
+Go to the client directory
 
 ```bash
-  cd my-project
+  cd bike-park-client
 ```
 
 Install dependencies
 
 ```bash
-  yarn install
+  npm install
 ```
 
-Start the server
+[Set up the environment variables](#environment-variables) by creating a new .env file from .env.sample
+
+Modify your .gitignore file to cover your needs - [Toptal's gitignore.io](https://www.toptal.com/developers/gitignore) is a useful tool to get a template by searching for package manager, OS, etc. For this project, recommended to at least include Node.
+
+Run the client-side
 
 ```bash
-  yarn start
+  npm start
 ```
 
 
 <!-- Deployment -->
-### Deployment
+<!-- ### Deployment
 
 To deploy this project run
 
 ```bash
   yarn deploy
-```
+``` -->
 
 
 <!-- Usage -->
-## Usage
+<!-- ## Usage
 
-Use this space to tell a little more about your project and how it can be used. Show additional screenshots, code samples, demos or link to other resources.
-
-
-```javascript
-import Component from 'my-project'
-function App() {
-  return <Component />
-}
-```
+Use this space to tell a little more about your project and how it can be used. Show additional screenshots, code samples, demos or link to other resources. -->
 
 <!-- Roadmap -->
 ## Roadmap
 
-* [x] Todo 1
-* [ ] Todo 2
-
-
-<!-- Contributing -->
-## Contributing
-
-<a href="https://github.com/Louis3797/awesome-readme-template/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=Louis3797/awesome-readme-template" />
-</a>
-
-
-Contributions are always welcome!
-
-See `contributing.md` for ways to get started.
-
-
-<!-- Code of Conduct -->
-### Code of Conduct
-
-Please read the [Code of Conduct](https://github.com/Louis3797/awesome-readme-template/blob/master/CODE_OF_CONDUCT.md)
+* [x] Proof of concept homepage
+* [x] Auth0 integration (dev mode)
+* [x] Stripe integration (dev mode)
+* [ ] User profile updates
+* [ ] User controlled booking management (incl. transferring tickets to other riders)
+* [ ] Unit testing
+* [ ] Phases 2 to 1,000 to build a full-featured bike park management system
 
 <!-- FAQ -->
-## FAQ
+<!-- ## FAQ
 
 - Question 1
 
@@ -270,29 +269,32 @@ Please read the [Code of Conduct](https://github.com/Louis3797/awesome-readme-te
 
 - Question 2
 
-  + Answer 2
+  + Answer 2 -->
 
 
 <!-- License -->
-## License
+# License
 
-Distributed under the no License. See LICENSE.txt for more information.
+Distributed under the MIT License. See LICENSE.txt for more information.
 
+# Contact
 
-<!-- Contact -->
-## Contact
+Valerie Pomerleau - [Twitter @PomerleauVal](https://twitter.com/PomerleauVal) - [LinkedIn @valeriepomerleau](https://www.linkedin.com/in/valeriepomerleau/) 
 
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
+## Project Link
 
-Project Link: [https://github.com/Louis3797/awesome-readme-template](https://github.com/Louis3797/awesome-readme-template)
+(client): [https://github.com/vpomerleau/bike-park-client](https://github.com/vpomerleau/bike-park-client)
 
+(server): [https://github.com/vpomerleau/bike-park-server](https://github.com/vpomerleau/bike-park-server)
 
-<!-- Acknowledgments -->
-## Acknowledgements
+# Acknowledgements
 
-Use this section to mention useful resources and libraries that you have used in your projects.
-
+ - Bike Lorem Ipsum from [Bicycle Ipsum](https://cogdog.github.io/bicycle-ipsum/)
+ - Logo design with [Canva](https://www.canva.com/)
+ - Database schema planning with [LucidChart](https://lucid.app/lucidchart/5ad69e98-8a23-448b-a979-63d8dca1a07b/edit?viewport_loc=-515%2C-100%2C2616%2C1481%2C0_0&invitationId=inv_a0392367-744c-4dc4-97de-515ca6583dd1#)
+ - [Auth0 API docs](https://auth0.com/docs/)
+ - [Stripe API docs](https://stripe.com/docs/api)
+ - [Stripe Dev Support on Discord](https://discord.com/invite/stripe)
  - [Shields.io](https://shields.io/)
- - [Awesome README](https://github.com/matiassingers/awesome-readme)
- - [Emoji Cheat Sheet](https://github.com/ikatyang/emoji-cheat-sheet/blob/master/README.md#travel--places)
- - [Readme Template](https://github.com/othneildrew/Best-README-Template)
+ - [Awesome README template](https://github.com/Louis3797/awesome-readme-template)
+ - Mountain bike animation adapted from: [Pure CSS bike animation](https://codepen.io/lucawater/pen/VwQVyj)

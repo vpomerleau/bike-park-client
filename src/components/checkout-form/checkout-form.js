@@ -8,6 +8,8 @@ import {
 import { Alert, Box, Button, Card, TextField, Typography } from "@mui/material";
 import "./checkout-form.scss";
 
+const CLIENT_URL=process.env.REACT_APP_CLIENT_URL
+
 export const CheckoutForm = (props) => {
   const { user } = useAuth0();
   const initialState = user ? user.email : "";
@@ -44,7 +46,7 @@ export const CheckoutForm = (props) => {
       confirmParams: {
         // receipt_email:{email},
         // TODO Make sure to change this to your payment completion page
-        return_url: "http://localhost:3000/booking/result",
+        return_url: `${CLIENT_URL}/booking/result`,
       },
     });
 
