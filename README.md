@@ -1,33 +1,32 @@
 <div align="center">
-
-
-  <img src="src/assets/logos/wbp-color-vertical.svg" alt="logo" width="200" height="auto" />
-  <h1>Woodwork Bike Park Management System - Client-side</h1>
+    <img src="src/assets/logos/wbp-color-vertical.svg#gh-light-mode-only" alt="logo"  width="200" height="auto" />
+    <img src="src/assets/logos/wbp-color-vertical-white-text.svg#gh-dark-mode-only" alt="logo" width="200" height="auto" />
+  <h1>Woodwork Bike Park Management System</h1>
   
   <p>
-    An awesome README template for your projects! 
+    Project in progress - phase 1 
   </p>
   
   
 <!-- Badges -->
 <p>
-  <a href="https://github.com/Louis3797/awesome-readme-template/graphs/contributors">
-    <img src="https://img.shields.io/github/contributors/Louis3797/awesome-readme-template" alt="contributors" />
+  <a href="https://github.com/vpomerleau/bike-park-client/graphs/contributors">
+    <img src="https://img.shields.io/github/contributors/vpomerleau/bike-park-client" alt="contributors" />
   </a>
   <a href="">
-    <img src="https://img.shields.io/github/last-commit/Louis3797/awesome-readme-template" alt="last update" />
+    <img src="https://img.shields.io/github/last-commit/vpomerleau/bike-park-client" alt="last update" />
   </a>
-  <a href="https://github.com/Louis3797/awesome-readme-template/network/members">
-    <img src="https://img.shields.io/github/forks/Louis3797/awesome-readme-template" alt="forks" />
+  <a href="https://github.com/vpomerleau/bike-park-client/network/members">
+    <img src="https://img.shields.io/github/forks/vpomerleau/bike-park-client" alt="forks" />
   </a>
-  <a href="https://github.com/Louis3797/awesome-readme-template/stargazers">
-    <img src="https://img.shields.io/github/stars/Louis3797/awesome-readme-template" alt="stars" />
+  <a href="https://github.com/vpomerleau/bike-park-client/stargazers">
+    <img src="https://img.shields.io/github/stars/vpomerleau/bike-park-client" alt="stars" />
   </a>
-  <a href="https://github.com/Louis3797/awesome-readme-template/issues/">
-    <img src="https://img.shields.io/github/issues/Louis3797/awesome-readme-template" alt="open issues" />
+  <a href="https://github.com/vpomerleau/bike-park-client/issues/">
+    <img src="https://img.shields.io/github/issues/vpomerleau/bike-park-client" alt="open issues" />
   </a>
-  <a href="https://github.com/Louis3797/awesome-readme-template/blob/master/LICENSE">
-    <img src="https://img.shields.io/github/license/Louis3797/awesome-readme-template.svg" alt="license" />
+  <a href="https://github.com/vpomerleau/bike-park-client/blob/master/LICENSE">
+    <img src="https://img.shields.io/github/license/vpomerleau/bike-park-client" alt="license" />
   </a>
 </p>
    
