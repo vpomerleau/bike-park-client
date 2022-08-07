@@ -1,0 +1,336 @@
+.loader {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+@keyframes wheelspin {
+  from {
+    transform-origin: center center;
+    transform: rotate(0deg);
+  }
+  to {
+    transform-origin: center center;
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pedalstem-front {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pedalbase-front {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+.bike {
+  position: relative;
+  height: 400px;
+  width: 600px;
+  margin: 4rem auto;
+}
+.bike .part {
+  position: absolute;
+}
+
+.frame .bar {
+  width: 14px;
+  position: absolute;
+  background: #2e845d;
+}
+
+.frame .bar.left-bottom {
+  width: 10px;
+  left: 143px;
+  top: 208px;
+  height: 180px;
+  transform: rotate(-90deg);
+}
+.frame .bar.left {
+  height: 150px;
+  left: 200px;
+  top: 150px;
+  transform: rotate(-18deg);
+}
+.frame .bar.top {
+  height: 370px;
+  left: 220px;
+  top: 25px;
+  transform: rotate(62deg);
+}
+.frame .bar.bottom {
+  left: 305px;
+  top: 100px;
+  height: 225px;
+  transform: rotate(42deg);
+}
+.frame .bar.right {
+  height: 180px;
+  left: 418px;
+  top: 124px;
+  transform: rotate(-25deg);
+  background-color: #000;
+}
+
+.sadle {
+  top: 80px;
+  left: 174px;
+}
+.sadle .sit-here {
+  height: 0;
+  width: 10px;
+  position: absolute;
+  border-bottom: 110px solid #000;
+  border-left: 0px solid transparent;
+  border-right: 22px solid transparent;
+  border-radius: 10px 0 10px 0;
+  top: -20px;
+  left: -15px;
+  transform: rotate(95deg);
+}
+.sadle .sadlepen {
+  width: 10px;
+  height: 50px;
+  top: 30px;
+  position: absolute;
+  background: #000;
+  transform: rotate(-18deg);
+}
+
+.wheel {
+  position: absolute;
+  top: 180px;
+  width: 240px;
+  height: 240px;
+  border-radius: 100%;
+  border: 15px solid #dadada;
+  box-shadow: 0 0 0 10px #333;
+}
+.wheel.left {
+  left: -55px;
+}
+.wheel.right {
+  right: 20px;
+}
+
+.wheel .disk {
+    position:absolute;
+    width:70px;
+    height:70px;
+    border-radius:100%;
+    top:68px;
+    border: 5px solid grey;
+    background-color: lightgrey;
+}
+
+.disk.left {
+    left:67px;
+}
+
+.disk.right {
+right:67px;
+}
+
+.spokes {
+  width: 235px;
+  height: 235px;
+  position: absolute;
+  top: -14px;
+  left: -15px;
+  animation-name: wheelspin;
+  animation-duration: 5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.wheel .spoke {
+  width: 2px;
+  height: 235px;
+  position: absolute;
+  top: 0;
+  left: 118px;
+  background: #dadada;
+}
+.wheel .spoke:nth-child(2) {
+  transform: rotate(30deg);
+}
+.wheel .spoke:nth-child(3) {
+  transform: rotate(60deg);
+}
+.wheel .spoke:nth-child(4) {
+  transform: rotate(90deg);
+}
+.wheel .spoke:nth-child(5) {
+  transform: rotate(120deg);
+}
+.wheel .spoke:nth-child(6) {
+  transform: rotate(150deg);
+}
+.wheel .spoke:nth-child(7) {
+  transform: rotate(180deg);
+}
+.wheel .spoke:nth-child(8) {
+  transform: rotate(210deg);
+}
+
+.axis {
+  width: 25px;
+  height: 25px;
+  top: 285px;
+  background: #333;
+  border-radius: 100%;
+}
+.axis.left {
+  left: 48px;
+}
+.axis.right {
+  left: 451px;
+}
+
+.handlebar .stem {
+  width: 13px;
+  height: 30px;
+  top: 100px;
+  left: 372px;
+  position: absolute;
+  background: #000;
+  transform: rotate(-25deg);
+}
+.handlebar .connector {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 363px;
+  top: 95px;
+  transform: rotate(-25deg);
+  background: #000;
+}
+.handlebar .prehandle {
+  position: absolute;
+  width: 15px;
+  height: 30px;
+  left: 360px;
+  top: 82px;
+  transform: rotate(95deg);
+  background: #000;
+}
+.handlebar .handle {
+  width: 20px;
+  height: 20px;
+  left: 343px;
+  top: 88px;
+  position: absolute;
+  background: #000;
+  border-radius: 100%;
+}
+
+.pedals {
+  margin-left: 227px;
+  margin-top: 295px;
+}
+.pedals * {
+  position: absolute;
+}
+.pedals .inside {
+  width: 9px;
+  height: 9px;
+  background: #333;
+  border-radius: 100%;
+  margin-left: 3.5px;
+  margin-top: 2.4px;
+}
+.pedals .outside {
+  width: 80px;
+  height: 80px;
+  margin-top: -39px;
+  margin-left: -37px;
+  border: 5px solid #000;
+  border-radius: 100%;
+}
+.pedals .pedalstem {
+  width: 12px;
+  height: 80px;
+  margin-left: 2px;
+  background: #000;
+  border-radius: 10px 10px 0 0;
+  transform-origin: 6px 7px;
+}
+.pedals .pedalstem.front {
+  animation-name: pedalstem-front;
+  animation-duration: 5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+.pedals .pedalstem.back {
+  animation-name: pedalstem-back;
+  animation-duration: 5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  transform: rotate(180deg);
+}
+.pedals .pedalbase {
+  width: 40px;
+  height: 15px;
+  margin-top: 70px;
+  margin-left: -12px;
+  background: #000;
+}
+.pedals .pedalbase.front {
+  animation-name: pedalbase-front;
+  animation-duration: 5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+.pedals .pedalbase.back {
+  animation-name: pedalbase-back;
+  animation-duration: 5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.inside {
+  z-index: 6;
+}
+
+.axis {
+  z-index: 5;
+}
+
+.pedalstem.front {
+  z-index: 5;
+}
+
+.frame {
+  z-index: 4;
+}
+
+.outside {
+  z-index: 4;
+}
+
+.handlebar {
+  z-index: 3;
+}
+
+.sit-here {
+  z-index: 2;
+}
+
+.wheel {
+  z-index: 1;
+}
+
+.pedalstem.back {
+  z-index: -1;
+}

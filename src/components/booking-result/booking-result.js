@@ -4,6 +4,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useLocation } from "react-router-dom";
 import { PageLayout } from "../page-layout";
 import "./booking-result.scss";
+import { PageLoader } from "../page-loader";
 
 const serverURL = process.env.REACT_APP_API_SERVER_URL;
 
@@ -138,6 +139,7 @@ export const BookingResult = () => {
             Please wait... your confirmation will be displayed shortly!
           </div>
         )}
+        <PageLoader />
       </div>
     </PageLayout>
   );
