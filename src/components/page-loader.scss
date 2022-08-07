@@ -34,6 +34,24 @@
   }
 }
 
+@keyframes pedalstem-back {
+  from {
+    transform: rotate(180deg);
+  }
+  to {
+    transform: rotate(540deg);
+  }
+}
+
+@keyframes pedalbase-back {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
 .bike {
   position: relative;
   height: 400px;
@@ -125,21 +143,21 @@
 }
 
 .wheel .disk {
-    position:absolute;
-    width:70px;
-    height:70px;
-    border-radius:100%;
-    top:68px;
-    border: 5px solid grey;
-    background-color: lightgrey;
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  border-radius: 100%;
+  top: 68px;
+  border: 5px solid grey;
+  background-color: lightgrey;
 }
 
 .disk.left {
-    left:67px;
+  left: 67px;
 }
 
 .disk.right {
-right:67px;
+  right: 67px;
 }
 
 .spokes {
@@ -149,7 +167,7 @@ right:67px;
   top: -14px;
   left: -15px;
   animation-name: wheelspin;
-  animation-duration: 5s;
+  animation-duration: 3s;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
 }
@@ -236,45 +254,45 @@ right:67px;
 }
 
 .pedals {
-  margin-left: 227px;
-  margin-top: 295px;
+  left: 225px;
+  top: 290px;
 }
 .pedals * {
   position: absolute;
 }
 .pedals .inside {
-  width: 9px;
-  height: 9px;
+  width: 20px;
+  height: 20px;
   background: #333;
   border-radius: 100%;
-  margin-left: 3.5px;
-  margin-top: 2.4px;
+  left: 0px;
+  top: 0px;
 }
 .pedals .outside {
-  width: 80px;
-  height: 80px;
-  margin-top: -39px;
-  margin-left: -37px;
+  width: 60px;
+  height: 60px;
+  top: -20px;
+  left: -20px;
   border: 5px solid #000;
   border-radius: 100%;
 }
 .pedals .pedalstem {
   width: 12px;
   height: 80px;
-  margin-left: 2px;
-  background: #000;
+  left: 2px;
   border-radius: 10px 10px 0 0;
   transform-origin: 6px 7px;
+  background: black;
 }
 .pedals .pedalstem.front {
   animation-name: pedalstem-front;
-  animation-duration: 5s;
+  animation-duration: 3s;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
 }
 .pedals .pedalstem.back {
   animation-name: pedalstem-back;
-  animation-duration: 5s;
+  animation-duration: 3s;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
   transform: rotate(180deg);
@@ -282,19 +300,19 @@ right:67px;
 .pedals .pedalbase {
   width: 40px;
   height: 15px;
-  margin-top: 70px;
-  margin-left: -12px;
+  top: 70px;
+  left: -12px;
   background: #000;
 }
 .pedals .pedalbase.front {
   animation-name: pedalbase-front;
-  animation-duration: 5s;
+  animation-duration: 3s;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
 }
 .pedals .pedalbase.back {
   animation-name: pedalbase-back;
-  animation-duration: 5s;
+  animation-duration: 3s;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
 }
@@ -332,5 +350,5 @@ right:67px;
 }
 
 .pedalstem.back {
-  z-index: -1;
+  z-index: 1;
 }
