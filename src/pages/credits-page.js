@@ -1,1 +1,0 @@
-// Hero image by <a href="https://unsplash.com/@vanderfilms?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Vander Films</a> on <a href="https://unsplash.com/s/photos/bike-park?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>

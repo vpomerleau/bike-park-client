@@ -3,8 +3,8 @@ import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Alert, Button, Typography } from "@mui/material";
 import { useLocation, useHistory } from "react-router-dom";
-import { PageLayout } from "../page-layout";
-import { PageLoader } from "../page-loader";
+import { PageLayout } from "../page-layout/page-layout";
+import { PageLoader } from "../animation-bike/page-loader";
 import "./booking-result.scss";
 
 const serverURL = process.env.REACT_APP_API_SERVER_URL;

@@ -1,7 +1,7 @@
 import React from "react";
 import { BikeParkFeature } from "./bike-park-feature";
 import "./bike-park-features.scss";
-import { PageLoader } from "./page-loader";
+import { PageLoader } from "../animation-bike/page-loader";
 
 export const BikeParkFeatures = () => {
   const featuresList = [

@@ -3,7 +3,7 @@ import axios from "axios";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 
-import CheckoutForm from "./checkout-form/checkout-form";
+import CheckoutForm from "../checkout-form/checkout-form";
 import { Paper } from "@mui/material";
 
 // Make sure to call loadStripe outside of a component’s render to avoid

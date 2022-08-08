@@ -4,7 +4,7 @@ import { Elements } from "@stripe/react-stripe-js";
 
 // Components
 import { BookingForm } from "../components/booking-form";
-import { CheckoutForm } from "../components/checkout-form/checkout-form";
+import { CheckoutForm } from "../../components/checkout-form/checkout-form";
 import { PageLayout } from "../components/page-layout";
 import "./booking-page.scss";
 

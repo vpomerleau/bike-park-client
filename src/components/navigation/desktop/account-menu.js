@@ -13,7 +13,7 @@ import { Link } from "@mui/material";
 // import PersonAdd from '@mui/icons-material/PersonAdd';
 // import Settings from '@mui/icons-material/Settings';
 import Logout from "@mui/icons-material/Logout";
-import { LogoutButton } from "../../buttons/logout-button";
+import { LogoutButton } from "../../buttons/button-logout";
 
 export function AccountMenu() {
   const { user } = useAuth0();
