@@ -36,11 +36,11 @@ export const App = () => {
         <ProtectedRoute path="/profile" component={ProfilePage} />
         <ProtectedRoute exact path="/booking" component={BookingPage} />
         <Route path="/booking/result" component={BookingResult} />
+        <Route path="*" component={NotFoundPage} />
         {/* Paths for optional Auth0 demo pages */}
         {/* <ProtectedRoute path="/protected" component={ProtectedPage} />
         <ProtectedRoute path="/admin" component={AdminPage} /> */}
         {/* <Route path="/public" component={PublicPage} /> */}
-        <Route path="*" component={NotFoundPage} />
       </Switch>
     </ThemeProvider>
   );

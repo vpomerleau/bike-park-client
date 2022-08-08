@@ -6,9 +6,10 @@ export const NavBarLink = ({ path, label }) => {
   return (
     <Link
       component={NavLink}
+      sx={{color:'white',textDecoration:'none'}}
       to={path}
       exact
       className="nav-bar__link"
-      activeClassName="nav-bar__link--active">{label}</Link>
+      activeClassName="nav-bar__link">{label}</Link>
   );
 };

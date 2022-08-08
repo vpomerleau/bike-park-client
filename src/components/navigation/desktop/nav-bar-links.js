@@ -7,13 +7,17 @@ export const NavBarLinks = () => {
 
   return (
     <div className="nav-bar__links">
-      <NavBarLink path="/public" label="Public" />
-      {isAuthenticated && (
+      <NavBarLink path="/facilities" label="Facilities" />
+      <NavBarLink path="/classes" label="Classes" />
+      <NavBarLink path="/rentals" label="Rentals" />
+      <NavBarLink path="/about" label="About us" />
+      {/* Optional link format for protected pages */}
+      {/* {isAuthenticated && (
         <>
-          <NavBarLink path="/protected" label="Protected" />
-          <NavBarLink path="/admin" label="Admin" />
+          <NavBarLink path="/protected" label="Check-in" />
+          <NavBarLink path="/admin" label="Admin dashboard" />
         </>
-      )}
+      )} */}
     </div>
   );
 };

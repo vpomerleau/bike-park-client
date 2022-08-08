@@ -1,14 +1,27 @@
 import React from "react";
+import { Button, Container, Typography } from "@mui/material";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { PageLayout } from "../../components/page-layout/page-layout";
+import { useHistory } from "react-router-dom";
 
 export const NotFoundPage = () => {
+  const history = useHistory();
+
   return (
     <PageLayout>
-      <div className="content-layout">
-        <h1 id="page-title" className="content__title">
-          Not Found
-        </h1>
-      </div>
+      <Container sx={{ maxWidth: "80em", mx: "auto", my: "3rem" }}>
+        <Typography variant="h2" component="p" textAlign={"center"}>
+          No bikes found here.
+        </Typography>
+        <Container sx={{textAlign:'center',my:'3rem'}}>
+          <Button
+            variant="contained"
+            startIcon={<ArrowBackIcon />}
+            onClick={history.goBack}>
+            Go Back
+          </Button>
+        </Container>
+      </Container>
     </PageLayout>
   );
 };
