@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Button, Grid, Typography } from "@mui/material";
 
-import { Product } from "./product";
+import { Product } from "../product/product";
 
 import "./booking-form.scss";
 

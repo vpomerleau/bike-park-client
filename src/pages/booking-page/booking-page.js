@@ -3,9 +3,9 @@ import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 
 // Components
-import { BookingForm } from "../components/booking-form";
+import { BookingForm } from "../../components/booking-form/booking-form";
 import { CheckoutForm } from "../../components/checkout-form/checkout-form";
-import { PageLayout } from "../components/page-layout";
+import { PageLayout } from "../../components/page-layout/page-layout";
 import "./booking-page.scss";
 
 // Make sure to call loadStripe outside of a component’s render to avoid

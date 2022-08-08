@@ -9,8 +9,6 @@ import {
   Typography,
 } from "@mui/material";
 
-import "./booking-form.scss";
-
 export const Product = (props) => {
   const [quantity, setQuantity] = useState(0);
   const { name, description, price, id } = props.item;

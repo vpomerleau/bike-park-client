@@ -1,6 +1,6 @@
 import React from "react";
 import "./hero-banner.scss";
-import heroImage from "../assets/images/vander-films-IGZgfepL4qY-unsplash.jpg";
+import heroImage from "../../assets/images/vander-films-IGZgfepL4qY-unsplash.jpg";
 
 export const HeroBanner = () => {
   return (

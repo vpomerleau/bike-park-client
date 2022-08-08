@@ -1,5 +1,5 @@
 import React from "react";
-import { BikeParkFeature } from "./bike-park-feature";
+import { BikeParkFeature } from "../feature-content/bike-park-feature";
 import "./bike-park-features.scss";
 import { PageLoader } from "../animation-bike/page-loader";
 

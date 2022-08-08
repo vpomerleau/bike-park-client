@@ -1,6 +1,6 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import React from "react";
-import { PageLayout } from "../components/page-layout";
+import { PageLayout } from "../../components/page-layout/page-layout";
 import {
   Avatar,
   Box,

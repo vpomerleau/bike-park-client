@@ -1,5 +1,5 @@
 import React from "react";
-import { BookingCTAButton } from "./buttons/booking-CTA-button";
+import { BookingCTAButton } from "../buttons/button-CTA";
 import "./booking-banner.scss";
 import { Typography } from "@mui/material";
 
