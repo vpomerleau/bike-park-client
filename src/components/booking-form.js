@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useAuth0 } from "@auth0/auth0-react";
 import { Button, Grid, Typography } from "@mui/material";
 
 import { Product } from "./product";
@@ -112,6 +111,7 @@ export const BookingForm = (props) => {
                 key={product.id}
                 item={product}
                 updateCart={updateCart}
+                cart={props.cart}
               />
             );
           })}

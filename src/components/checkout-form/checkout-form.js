@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import {
   PaymentElement,
@@ -8,7 +8,7 @@ import {
 import { Alert, Box, Button, Card, TextField, Typography } from "@mui/material";
 import "./checkout-form.scss";
 
-const CLIENT_URL=process.env.REACT_APP_CLIENT_URL
+const clientURL=process.env.REACT_APP_API_CLIENT_URL;
 
 export const CheckoutForm = (props) => {
   const { user } = useAuth0();
@@ -38,17 +38,11 @@ export const CheckoutForm = (props) => {
 
     setIsLoading(true);
 
-    // TODO POST request to add new rider from email
-    // ?? update rider product
-
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        // receipt_email:{email},
-        // TODO Make sure to change this to your payment completion page
-        return_url: `${CLIENT_URL}/booking/result`,
-      },
-    });
+        return_url: `${clientURL}/booking/result`,
+      }});
 
     // This point will only be reached if there is an immediate error when
     // confirming the payment. Otherwise, your customer will be redirected to
@@ -103,7 +97,7 @@ export const CheckoutForm = (props) => {
               sx={{ mt: "1rem" }}>
               <span id="button-text">
                 {isLoading ? (
-                  <div className="spinner" id="spinner"></div>
+                 'Processing...'
                 ) : (
                   `Pay ${props.verifiedTotal} now`
                 )}

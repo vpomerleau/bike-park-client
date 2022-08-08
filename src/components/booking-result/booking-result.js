@@ -22,10 +22,6 @@ export const BookingResult = () => {
   const paymentIntentId = new URLSearchParams(searchParams).get(
     "payment_intent"
   );
-  const clientSecret = new URLSearchParams(searchParams).get(
-    "payment_intent_client_secret"
-  );
-  // const status = new URLSearchParams(searchParams).get("redirect_status");
 
   // retrieve payment intent data from stripe
   useEffect(() => {
@@ -33,7 +29,6 @@ export const BookingResult = () => {
       .get(`${serverURL}/stripe/retrieve-payment-intent/${paymentIntentId}`)
       .then((res) => {
         setPaymentData(res.data);
-        console.log(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -82,7 +77,7 @@ export const BookingResult = () => {
   const createRiderProductRecords = () => {
     const cartData = JSON.parse(paymentData.metadata.cart);
 
-    Array.from(cartData).map((item) => {
+    Array.from(cartData).forEach((item) => {
       const riderProductId = `${transactionId}-${item.id}`;
       const body = JSON.stringify({
         id: riderProductId,
@@ -91,8 +86,6 @@ export const BookingResult = () => {
         product_id: item.id,
         quantity: item.quantity,
       });
-
-      console.log(body);
 
       axios
         .post(`${serverURL}/rider-product`, body, {
