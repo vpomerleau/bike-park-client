@@ -10,116 +10,176 @@ import "./booking-result.scss";
 const serverURL = process.env.REACT_APP_API_SERVER_URL;
 
 export const BookingResult = () => {
+  // const { user } = useAuth0();
+  // const history = useHistory();
+
+  // const [runTimes, setRunTimes] = useState(0);
+
+  // const [transactionId, setTransactionId] = useState();
+  // const [riderProductCreated, setRiderProductCreated] = useState(false);
+  // const [riderProducts, setRiderProducts] = useState();
   const { user } = useAuth0();
-  const history = useHistory();
-  const [paymentData, setPaymentData] = useState();
-  const [runTimes, setRunTimes] = useState(0);
-  const [riderId, setRiderId] = useState();
-  const [transactionId, setTransactionId] = useState();
-  const [riderProductCreated, setRiderProductCreated] = useState(false);
-
   const searchParams = useLocation().search;
-  const paymentIntentId = new URLSearchParams(searchParams).get(
-    "payment_intent"
-  );
+  const [paymentIntentData, setPaymentIntentData] = useState();
+  const [riderId, setRiderId] = useState();
 
-  // retrieve payment intent data from stripe
   useEffect(() => {
-    axios
-      .get(`${serverURL}/stripe/retrieve-payment-intent/${paymentIntentId}`)
-      .then((res) => {
-        setPaymentData(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [paymentIntentId]);
+    const paymentIntentId = new URLSearchParams(searchParams).get(
+      "payment_intent"
+    );
 
-  // Create a new rider from the login details
-  const createRiderProfile = () => {
-    const body = JSON.stringify({
-      email: user.email,
-      first_name: user.given_name,
-      last_name: user.family_name,
-    });
-    axios
-      .post(`${serverURL}/riders`, body, {
-        headers: { "Content-Type": "application/json" },
-      })
-      .then((res) => {
-        setRiderId(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  // Create transaction record in database
-  const createTransactionRecord = () => {
-    const body = JSON.stringify({
-      stripe_payment_id: paymentData.id,
-      transaction_status: paymentData.status,
-      rider_id: riderId,
-    });
-
-    axios
-      .post(`${serverURL}/transaction`, body, {
-        headers: { "Content-Type": "application/json" },
-      })
-      .then((res) => {
-        setTransactionId(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  const createRiderProductRecords = () => {
-    const cartData = JSON.parse(paymentData.metadata.cart);
-
-    Array.from(cartData).forEach((item) => {
-      const riderProductId = `${transactionId}-${item.id}`;
-      const body = JSON.stringify({
-        id: riderProductId,
-        transaction_id: transactionId,
-        rider_id: riderId,
-        product_id: item.id,
-        quantity: item.quantity,
-      });
-
+    const getPaymentIntentData = () => {
       axios
-        .post(`${serverURL}/rider-product`, body, {
-          headers: { "Content-Type": "application/json" },
-        })
+        .get(`${serverURL}/stripe/retrieve-payment-intent/${paymentIntentId}`)
         .then((res) => {
-          setRiderProductCreated(true);
+          setPaymentIntentData(res.data);
         })
         .catch((err) => {
           console.log(err);
         });
-    });
-  };
+    };
 
-  if (runTimes === 0 && paymentData) {
-    setRunTimes(1);
+    const createRiderProfile = () => {
+      const body = JSON.stringify({
+        email: user.email,
+        first_name: user.given_name,
+        last_name: user.family_name,
+      });
+      axios
+        .post(`${serverURL}/riders`, body, {
+          headers: { "Content-Type": "application/json" },
+        })
+        .then((res) => {
+          setRiderId(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+
+    getPaymentIntentData();
     createRiderProfile();
-  }
+  }, []);
 
-  if (riderId) {
-    createTransactionRecord();
-  }
 
-  if (transactionId) {
-    createRiderProductRecords();
-  }
+  // retrieve payment intent data from stripe
+  // useEffect(() => {
+  //   axios
+  //     .get(`${serverURL}/stripe/retrieve-payment-intent/${paymentIntentId}`)
+  //     .then((res) => {
+  //       setPaymentData(res.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }, [paymentIntentId]);
 
-  const handleRedirectToProfile = () => {
-    history.push("/profile");
-  };
+  // Create a new rider from the login details
+  // const createRiderProfile = () => {
+  //   const body = JSON.stringify({
+  //     email: user.email,
+  //     first_name: user.given_name,
+  //     last_name: user.family_name,
+  //   });
+  //   axios
+  //     .post(`${serverURL}/riders`, body, {
+  //       headers: { "Content-Type": "application/json" },
+  //     })
+  //     .then((res) => {
+  //       setRiderId(res.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
+
+  // Create transaction record in database
+  // const createTransactionRecord = () => {
+  //   const body = JSON.stringify({
+  //     stripe_payment_id: paymentData.id,
+  //     transaction_status: paymentData.status,
+  //     rider_id: riderId,
+  //   });
+
+  //   axios
+  //     .post(`${serverURL}/transaction`, body, {
+  //       headers: { "Content-Type": "application/json" },
+  //     })
+  //     .then((res) => {
+  //       setTransactionId(res.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
+
+  // const getRiderProducts = () => {
+  //   console.log('getRiderProducts running')
+  //   axios
+  //     .get(`${serverURL}/rider-product/${riderId}`)
+  //     .then((res) => {
+  //       setRiderProducts(res.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
+
+  // const createRiderProductRecords = () => {
+  //   const cartData = JSON.parse(paymentData.metadata.cart);
+
+  //   Array.from(cartData).forEach((item) => {
+  //     const riderProductId = `${transactionId}-${item.id}`;
+  //     const body = JSON.stringify({
+  //       id: riderProductId,
+  //       transaction_id: transactionId,
+  //       rider_id: riderId,
+  //       product_id: item.id,
+  //       quantity: item.quantity,
+  //     });
+
+  //     axios
+  //       .post(`${serverURL}/rider-product`, body, {
+  //         headers: { "Content-Type": "application/json" },
+  //       })
+  //       .then((res) => {
+  //         setRiderProductCreated(true);
+  //       })
+  //       .catch((err) => {
+  //         console.log(err);
+  //       });
+  //   });
+  // };
+
+  //   if (runTimes === 0 && paymentData) {
+  //     setRunTimes(1);
+  //     createRiderProfile();
+  //   }
+
+  //   if (riderId) {
+  //     createTransactionRecord();
+  //   }
+
+  //   if (transactionId) {
+  //     createRiderProductRecords();
+  //   }
+
+  // if (riderProductCreated) {
+  //   console.log('rider products detail call')
+  //   getRiderProducts();
+  // }
+
+  //   const handleRedirectToProfile = () => {
+  //     history.push("/profile");
+  //   };
 
   return (
     <PageLayout>
-      <div className="booking-result__container">
+      <Typography variant='h1'>Rider ID</Typography>
+      <Typography>{riderId}</Typography>
+      <Typography variant="h1">Payment Intent Data</Typography>
+      <Typography>{JSON.stringify(paymentIntentData)}</Typography>
+      {/* <div className="booking-result__container">
         {!transactionId && (
           <>
             <Typography variant="h2" component="p">
@@ -152,8 +212,8 @@ export const BookingResult = () => {
             Tickets saved to your rider profile
           </Alert>
         )}
-        <PageLoader />
-      </div>
+        {riderProducts && (<Typography>{JSON.stringify(riderProducts)}</Typography>)}
+      </div> */}
     </PageLayout>
   );
 };
