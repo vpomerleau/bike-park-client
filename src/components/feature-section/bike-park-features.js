@@ -55,9 +55,6 @@ export const BikeParkFeatures = () => {
           />
         ))}
       </div>
-      <div className="bike__container">
-        <PageLoader />
-      </div>
     </div>
   );
 };

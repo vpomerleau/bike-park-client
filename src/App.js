@@ -1,6 +1,7 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import React from "react";
 import { Switch, Route } from "react-router-dom";
+import { Typography } from "@mui/material";
 import { PageLoader } from "./components/animation-bike/page-loader";
 import { ProtectedRoute } from "./components/protected-route/protected-route";
 import { BookingPage } from "./pages/booking-page/booking-page";
@@ -9,6 +10,7 @@ import { HomePage } from "./pages/home-page/home-page";
 import { NotFoundPage } from "./pages/not-found-page/not-found-page";
 import { ProfilePage } from "./pages/profile-page/profile-page";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { PageLayout } from "./components/page-layout/page-layout";
 
 const theme = createTheme({
   palette: {
@@ -23,9 +25,10 @@ export const App = () => {
 
   if (isLoading) {
     return (
-      <div className="page-layout">
+      <PageLayout>
+        <Typography variant="h2" component="p">Loading...</Typography>
         <PageLoader />
-      </div>
+      </PageLayout>
     );
   }
 
