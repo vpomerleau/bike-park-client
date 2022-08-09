@@ -16,6 +16,9 @@ import {
   Typography,
 } from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import Brightness7Icon from '@mui/icons-material/Brightness7';
+import Brightness6Icon from '@mui/icons-material/Brightness6';
+import Brightness4Icon from '@mui/icons-material/Brightness4';
 import "./booking-result.scss";
 
 const serverURL = process.env.REACT_APP_API_SERVER_URL;
@@ -33,8 +36,8 @@ export const BookingResult = () => {
   const searchParams = useLocation().search;
   const [paymentIntentData, setPaymentIntentData] = useState();
   const [riderId, setRiderId] = useState();
-  const [requestBody, setRequestBody] = useState();
   const [isTransactionRecorded, setIsTransactionRecorded] = useState(false);
+  const [isCheckin, setIsCheckin] = useState(false);
 
   useEffect(() => {
     const paymentIntentId = new URLSearchParams(searchParams).get(
@@ -221,6 +224,14 @@ export const BookingResult = () => {
   //     history.push("/profile");
   //   };
 
+  const handleClick = () => {
+    if (!isCheckin) {
+      setIsCheckin(true);
+    } else {
+      setIsCheckin(false);
+    }
+  };
+
   return (
     <PageLayout>
       {!isTransactionRecorded && <PageLoader />}
@@ -246,9 +257,13 @@ export const BookingResult = () => {
               (item) => (
                 <Grid item xs={12} md={6} lg={4}>
                   <Card sx={{ p: "1rem" }}>
-                    <Typography key={item.id}>
+                    {(item.name==='full day pass') && <Brightness7Icon sx={{fontSize:'5rem'}} />}
+                    {(item.name==='half day pass') && <Brightness6Icon sx={{fontSize:'5rem'}} />}
+                    {(item.name==='evening pass') && <Brightness4Icon sx={{fontSize:'5rem'}} />}
+                    <Typography variant='h5' component='p' key={item.id}>
                       {item.quantity} x {item.name}
                     </Typography>
+                    {isCheckin && <Button variant="contained" sx={{mt:'1rem'}}>Use this pass</Button>}
                   </Card>
                 </Grid>
               )
@@ -257,8 +272,13 @@ export const BookingResult = () => {
           <Typography variant="h4" component="p" sx={{ my: "2rem" }}>
             What would you like to do next?
           </Typography>
-          <Stack spacing={2} alignItems="center" justifyContent='center'>
-            <Button variant="contained" sx={{width:'fit-content'}}>Check in now</Button>
+          <Stack spacing={2} alignItems="center" justifyContent="center">
+            <Button
+              variant="contained"
+              sx={{ width: "fit-content" }}
+              onClick={handleClick}>
+              {isCheckin ? "Cancel check-in" : "Check in now"}
+            </Button>
             <Button>Manage your bookings</Button>
           </Stack>
         </Container>
