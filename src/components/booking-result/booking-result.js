@@ -8,36 +8,37 @@ import { PageLoader } from "../animation-bike/page-loader";
 
 import {
   Alert,
+  Box,
   Button,
   Card,
   Container,
   Grid,
+  Modal,
   Stack,
   Typography,
 } from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import Brightness7Icon from '@mui/icons-material/Brightness7';
-import Brightness6Icon from '@mui/icons-material/Brightness6';
-import Brightness4Icon from '@mui/icons-material/Brightness4';
+import Brightness7Icon from "@mui/icons-material/Brightness7";
+import Brightness6Icon from "@mui/icons-material/Brightness6";
+import Brightness4Icon from "@mui/icons-material/Brightness4";
+
+import qrcode from '../../assets/qr-codes/demo-qrcode.png';
+
 import "./booking-result.scss";
 
 const serverURL = process.env.REACT_APP_API_SERVER_URL;
 
 export const BookingResult = () => {
-  // const { user } = useAuth0();
-  // const history = useHistory();
-
-  // const [runTimes, setRunTimes] = useState(0);
-
-  // const [transactionId, setTransactionId] = useState();
-  // const [riderProductCreated, setRiderProductCreated] = useState(false);
-  // const [riderProducts, setRiderProducts] = useState();
+  const history = useHistory();
   const { user } = useAuth0();
   const searchParams = useLocation().search;
+
   const [paymentIntentData, setPaymentIntentData] = useState();
   const [riderId, setRiderId] = useState();
   const [isTransactionRecorded, setIsTransactionRecorded] = useState(false);
   const [isCheckin, setIsCheckin] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [checkinPassType, setCheckinPassType] = useState();
 
   useEffect(() => {
     const paymentIntentId = new URLSearchParams(searchParams).get(
@@ -113,123 +114,43 @@ export const BookingResult = () => {
     }
   }, [paymentIntentData, riderId]);
 
-  // retrieve payment intent data from stripe
-  // useEffect(() => {
-  //   axios
-  //     .get(`${serverURL}/stripe/retrieve-payment-intent/${paymentIntentId}`)
-  //     .then((res) => {
-  //       setPaymentData(res.data);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, [paymentIntentId]);
+  const handleRedirectToProfile = () => {
+      history.push("/profile");
+ };
 
-  // Create a new rider from the login details
-  // const createRiderProfile = () => {
-  //   const body = JSON.stringify({
-  //     email: user.email,
-  //     first_name: user.given_name,
-  //     last_name: user.family_name,
-  //   });
-  //   axios
-  //     .post(`${serverURL}/riders`, body, {
-  //       headers: { "Content-Type": "application/json" },
-  //     })
-  //     .then((res) => {
-  //       setRiderId(res.data);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
-
-  // Create transaction record in database
-  // const createTransactionRecord = () => {
-  //   const body = JSON.stringify({
-  //     stripe_payment_id: paymentData.id,
-  //     transaction_status: paymentData.status,
-  //     rider_id: riderId,
-  //   });
-
-  //   axios
-  //     .post(`${serverURL}/transaction`, body, {
-  //       headers: { "Content-Type": "application/json" },
-  //     })
-  //     .then((res) => {
-  //       setTransactionId(res.data);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
-
-  // const getRiderProducts = () => {
-  //   console.log('getRiderProducts running')
-  //   axios
-  //     .get(`${serverURL}/rider-product/${riderId}`)
-  //     .then((res) => {
-  //       setRiderProducts(res.data);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
-
-  // const createRiderProductRecords = () => {
-  //   const cartData = JSON.parse(paymentData.metadata.cart);
-
-  //   Array.from(cartData).forEach((item) => {
-  //     const riderProductId = `${transactionId}-${item.id}`;
-  //     const body = JSON.stringify({
-  //       id: riderProductId,
-  //       transaction_id: transactionId,
-  //       rider_id: riderId,
-  //       product_id: item.id,
-  //       quantity: item.quantity,
-  //     });
-
-  //     axios
-  //       .post(`${serverURL}/rider-product`, body, {
-  //         headers: { "Content-Type": "application/json" },
-  //       })
-  //       .then((res) => {
-  //         setRiderProductCreated(true);
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //       });
-  //   });
-  // };
-
-  //   if (runTimes === 0 && paymentData) {
-  //     setRunTimes(1);
-  //     createRiderProfile();
-  //   }
-
-  //   if (riderId) {
-  //     createTransactionRecord();
-  //   }
-
-  //   if (transactionId) {
-  //     createRiderProductRecords();
-  //   }
-
-  // if (riderProductCreated) {
-  //   console.log('rider products detail call')
-  //   getRiderProducts();
-  // }
-
-  //   const handleRedirectToProfile = () => {
-  //     history.push("/profile");
-  //   };
-
-  const handleClick = () => {
+  // Display/hide buttons to check-in on individual passes
+  const activateCheckInMode = () => {
     if (!isCheckin) {
       setIsCheckin(true);
     } else {
       setIsCheckin(false);
     }
+  };
+
+  // Open modal with check-in information
+  const handleOpen = (passType) => {
+    setOpen(true);
+    setCheckinPassType(passType);
+  };
+
+  // Close check-in modal
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const modalStyle = {
+    position: 'absolute',
+    top: '30%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    minWidth:'10rem',
+    width: '50%',
+    minHeight:'20rem',
+    bgcolor: 'background.paper',
+    border: 'none',
+    boxShadow: 12,
+    textAlign:'center',
+    p: 6,
   };
 
   return (
@@ -257,18 +178,48 @@ export const BookingResult = () => {
               (item) => (
                 <Grid item xs={12} md={6} lg={4}>
                   <Card sx={{ p: "1rem" }}>
-                    {(item.name==='full day pass') && <Brightness7Icon sx={{fontSize:'5rem'}} />}
-                    {(item.name==='half day pass') && <Brightness6Icon sx={{fontSize:'5rem'}} />}
-                    {(item.name==='evening pass') && <Brightness4Icon sx={{fontSize:'5rem'}} />}
-                    <Typography variant='h5' component='p' key={item.id}>
+                    {item.name === "full day pass" && (
+                      <Brightness7Icon sx={{ fontSize: "5rem" }} />
+                    )}
+                    {item.name === "half day pass" && (
+                      <Brightness6Icon sx={{ fontSize: "5rem" }} />
+                    )}
+                    {item.name === "evening pass" && (
+                      <Brightness4Icon sx={{ fontSize: "5rem" }} />
+                    )}
+                    <Typography variant="h5" component="p" key={item.id}>
                       {item.quantity} x {item.name}
                     </Typography>
-                    {isCheckin && <Button variant="contained" sx={{mt:'1rem'}}>Use this pass</Button>}
+                    {isCheckin && (
+                      <Button
+                        variant="contained"
+                        sx={{ mt: "1rem" }}
+                        onClick={() => {
+                          handleOpen(item.name);
+                        }}>
+                        Use this pass
+                      </Button>
+                    )}
                   </Card>
                 </Grid>
               )
             )}
           </Grid>
+          <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="Check In"
+            aria-describedby="Scan the QR code on arrival at the bike park">
+            <Box sx={modalStyle}>
+              <Typography id="modal-modal-title" variant="h6" component="h2">
+                Check in with your {checkinPassType}
+              </Typography>
+              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                Scan your QR code at the bike park front desk
+              </Typography>
+              <img src={qrcode} height='200px' alt='qr code for checkin at front desk' />
+            </Box>
+          </Modal>
           <Typography variant="h4" component="p" sx={{ my: "2rem" }}>
             What would you like to do next?
           </Typography>
@@ -276,55 +227,13 @@ export const BookingResult = () => {
             <Button
               variant="contained"
               sx={{ width: "fit-content" }}
-              onClick={handleClick}>
+              onClick={activateCheckInMode}>
               {isCheckin ? "Cancel check-in" : "Check in now"}
             </Button>
-            <Button>Manage your bookings</Button>
+            <Button onClick={handleRedirectToProfile}>Manage your bookings</Button>
           </Stack>
         </Container>
       )}
-
-      {/* <Typography variant="h1">Rider ID</Typography>
-      <Typography>{riderId}</Typography>
-      <Typography variant="h1">Payment Intent Data</Typography>
-      <Typography>{JSON.stringify(paymentIntentData)}</Typography>
-      <Typography variant="h1">Request Body</Typography>
-      <Typography>{requestBody}</Typography> */}
-      {/* <div className="booking-result__container">
-        {!transactionId && (
-          <>
-            <Typography variant="h2" component="p">
-              Loading...
-            </Typography>
-          </>
-        )}
-        {riderId && (
-          <Alert severity="success" sx={{ mb: "1rem" }} onClose={() => {}}>
-            Rider profile created
-          </Alert>
-        )}
-        {transactionId && (
-          <Alert severity="success" sx={{ mb: "1rem" }} onClose={() => {}}>
-            Transaction recorded
-          </Alert>
-        )}
-        {riderProductCreated && (
-          <Alert
-            variant="filled"
-            severity="success"
-            action={
-              <Button
-                color="inherit"
-                size="small"
-                onClick={handleRedirectToProfile}>
-                Go to profile
-              </Button>
-            }>
-            Tickets saved to your rider profile
-          </Alert>
-        )}
-        {riderProducts && (<Typography>{JSON.stringify(riderProducts)}</Typography>)}
-      </div> */}
     </PageLayout>
   );
 };
