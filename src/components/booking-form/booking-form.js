@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Button, Grid, Typography } from "@mui/material";
+import { Button, Divider, Grid, Typography } from "@mui/material";
 
 import { Product } from "../product/product";
 
@@ -116,31 +116,45 @@ export const BookingForm = (props) => {
             );
           })}
         </Grid>
-
-        {props.cart &&
-          props.cart.map((item) => {
-            return (
-              <Typography key={item.id} align="right" sx={{ my: "1rem" }}>
-                {item.quantity} {item.name}
-              </Typography>
-            );
-          })}
-
-        <Typography align="right" sx={{ fontSize: "2rem", my: "2rem" }}>
-          Total:
-          {props.total.toLocaleString("en-CA", {
-            style: "currency",
-            currency: "cad",
-          })}
-        </Typography>
-        <div className="booking-form__actions">
-          {/* <Button variant="outlined" onClick={handleCartReset}>
+        <Divider sx={{ my: "1rem" }} />
+        <Grid container>
+          <Grid item xs={12} md={6} lg={8} sx={{ alignText: "left" }}>
+            <Typography variant="h6" component="p">
+              In your cart:
+            </Typography>
+            {props.cart.length === 0 && (
+              <Typography>Nothing yet!</Typography>
+            )}
+            {props.cart &&
+              props.cart.map((item) => {
+                return (
+                  <Typography key={item.id}>
+                    {item.quantity} x {item.name}
+                  </Typography>
+                );
+              })}
+          </Grid>
+          <Grid item xs={12} md={6} lg={4}>
+            <Typography align="right" sx={{ fontSize: "2rem", mb: "2rem" }}>
+              Total:
+              {props.total.toLocaleString("en-CA", {
+                style: "currency",
+                currency: "cad",
+              })}
+            </Typography>
+            <div className="booking-form__actions">
+              {/* <Button variant="outlined" onClick={handleCartReset}>
             Reset Cart
           </Button> */}
-          <Button type="submit" variant="contained" disabled={isCartEmpty()}>
-            Checkout
-          </Button>
-        </div>
+              <Button
+                type="submit"
+                variant="contained"
+                disabled={isCartEmpty()}>
+                Checkout
+              </Button>
+            </div>
+          </Grid>
+        </Grid>
       </form>
     </div>
   );

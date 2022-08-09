@@ -10,7 +10,7 @@ export const BookingCTAButton = () => {
       to="/booking"
       variant="contained"
       className="button__booking-cta">
-      Buy Now
+      Buy Tickets Now
     </Button>
   );
 };
