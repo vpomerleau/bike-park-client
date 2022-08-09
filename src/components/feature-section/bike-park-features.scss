@@ -4,33 +4,16 @@
   justify-content: space-around;
   flex-wrap: wrap;
   max-width: 80em;
-  margin: 0 auto;
-
-  &__grid {
-    flex-basis: 100%;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    gap: 2rem;
-  }
+  margin: 0 auto -5rem auto;
 }
 
 .bike {
-  animation: upDown 750ms alternate infinite ease-in-out;
-
   &__container {
     display:block;
     width:100vw;
-    height:600px;
+    margin-top:-6rem;
     margin-left:'-90vw';
-    margin-bottom:5rem;
     animation: rightLeft 4s infinite linear;
-  }
-}
-
-@keyframes upDown {
-  to {
-    transform: translatey(100px);
   }
 }
 
