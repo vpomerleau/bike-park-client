@@ -11,7 +11,7 @@ export const NotFoundPage = () => {
     <PageLayout>
       <Container sx={{ maxWidth: "80em", mx: "auto", my: "3rem" }}>
         <Typography variant="h2" component="p" textAlign={"center"}>
-          No bikes found here.
+          Uh-oh, we're off trail.
         </Typography>
         <Container sx={{textAlign:'center',my:'3rem'}}>
           <Button
