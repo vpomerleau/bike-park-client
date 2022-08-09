@@ -22,23 +22,28 @@ export const BookingResult = () => {
   const searchParams = useLocation().search;
   const [paymentIntentData, setPaymentIntentData] = useState();
   const [riderId, setRiderId] = useState();
+  const [requestBody, setRequestBody] = useState();
 
   useEffect(() => {
     const paymentIntentId = new URLSearchParams(searchParams).get(
       "payment_intent"
     );
 
-    const getPaymentIntentData = () => {
+    // retrieve payment intent details from stripe
+    const getPaymentIntentData = async () => {
       axios
         .get(`${serverURL}/stripe/retrieve-payment-intent/${paymentIntentId}`)
         .then((res) => {
           setPaymentIntentData(res.data);
+          console.log("getPaymentIntentData");
         })
         .catch((err) => {
           console.log(err);
         });
     };
 
+    // create a rider profile in the database from Auth0 user details
+    // and return the rider id from the database
     const createRiderProfile = () => {
       const body = JSON.stringify({
         email: user.email,
@@ -51,6 +56,7 @@ export const BookingResult = () => {
         })
         .then((res) => {
           setRiderId(res.data);
+          console.log("createRiderProfile");
         })
         .catch((err) => {
           console.log(err);
@@ -58,9 +64,46 @@ export const BookingResult = () => {
     };
 
     getPaymentIntentData();
-    createRiderProfile();
+    if (user) {
+      createRiderProfile();
+    }
   }, []);
 
+  // when paymentIntentData and rider Id are both updated
+  // create a transaction record in the database
+  // this logs a new transaction in the transactions table
+  // creates new entries in the product transaction table for each item in the cart
+  // and creates new entries in the rider_product table for each item in the cart
+  useEffect(() => {
+    const createTransactionRecord = () => {
+      const body = JSON.stringify({
+        cart_details: paymentIntentData.metadata.cart,
+        stripe_payment_id: paymentIntentData.id,
+        transaction_status: paymentIntentData.status,
+        rider_id: riderId,
+      });
+
+      console.log(body);
+
+      setRequestBody(body);
+      console.log("createTransactionRecord");
+
+      axios
+        .post(`${serverURL}/transaction`, body, {
+          headers: { "Content-Type": "application/json" },
+        })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+
+    if (paymentIntentData && riderId) {
+      createTransactionRecord();
+    }
+  }, [paymentIntentData, riderId]);
 
   // retrieve payment intent data from stripe
   // useEffect(() => {
@@ -175,10 +218,12 @@ export const BookingResult = () => {
 
   return (
     <PageLayout>
-      <Typography variant='h1'>Rider ID</Typography>
+      <Typography variant="h1">Rider ID</Typography>
       <Typography>{riderId}</Typography>
       <Typography variant="h1">Payment Intent Data</Typography>
       <Typography>{JSON.stringify(paymentIntentData)}</Typography>
+      <Typography variant="h1">Request Body</Typography>
+      <Typography>{requestBody}</Typography>
       {/* <div className="booking-result__container">
         {!transactionId && (
           <>
