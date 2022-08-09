@@ -104,8 +104,6 @@ export const CheckoutForm = (props) => {
               </span>
             </Button>
           </div>
-          {/* Show any error or success messages */}
-          {message && <div id="payment-message">{message}</div>}
         </form>
       </Card>
     </div>

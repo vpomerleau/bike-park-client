@@ -1,10 +1,21 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
-import { Alert, Button, Typography } from "@mui/material";
 import { useLocation, useHistory } from "react-router-dom";
+
 import { PageLayout } from "../page-layout/page-layout";
 import { PageLoader } from "../animation-bike/page-loader";
+
+import {
+  Alert,
+  Button,
+  Card,
+  Container,
+  Grid,
+  Stack,
+  Typography,
+} from "@mui/material";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import "./booking-result.scss";
 
 const serverURL = process.env.REACT_APP_API_SERVER_URL;
@@ -23,6 +34,7 @@ export const BookingResult = () => {
   const [paymentIntentData, setPaymentIntentData] = useState();
   const [riderId, setRiderId] = useState();
   const [requestBody, setRequestBody] = useState();
+  const [isTransactionRecorded, setIsTransactionRecorded] = useState(false);
 
   useEffect(() => {
     const paymentIntentId = new URLSearchParams(searchParams).get(
@@ -35,7 +47,6 @@ export const BookingResult = () => {
         .get(`${serverURL}/stripe/retrieve-payment-intent/${paymentIntentId}`)
         .then((res) => {
           setPaymentIntentData(res.data);
-          console.log("getPaymentIntentData");
         })
         .catch((err) => {
           console.log(err);
@@ -50,13 +61,13 @@ export const BookingResult = () => {
         first_name: user.given_name,
         last_name: user.family_name,
       });
+
       axios
         .post(`${serverURL}/riders`, body, {
           headers: { "Content-Type": "application/json" },
         })
         .then((res) => {
           setRiderId(res.data);
-          console.log("createRiderProfile");
         })
         .catch((err) => {
           console.log(err);
@@ -72,7 +83,6 @@ export const BookingResult = () => {
   // when paymentIntentData and rider Id are both updated
   // create a transaction record in the database
   // this logs a new transaction in the transactions table
-  // creates new entries in the product transaction table for each item in the cart
   // and creates new entries in the rider_product table for each item in the cart
   useEffect(() => {
     const createTransactionRecord = () => {
@@ -83,17 +93,12 @@ export const BookingResult = () => {
         rider_id: riderId,
       });
 
-      console.log(body);
-
-      setRequestBody(body);
-      console.log("createTransactionRecord");
-
       axios
         .post(`${serverURL}/transaction`, body, {
           headers: { "Content-Type": "application/json" },
         })
         .then((res) => {
-          console.log(res);
+          setIsTransactionRecorded(true);
         })
         .catch((err) => {
           console.log(err);
@@ -218,12 +223,53 @@ export const BookingResult = () => {
 
   return (
     <PageLayout>
-      <Typography variant="h1">Rider ID</Typography>
+      {!isTransactionRecorded && <PageLoader />}
+      {isTransactionRecorded && (
+        <Container
+          className="booking-result__container"
+          sx={{ textAlign: "center" }}>
+          <Alert
+            severity="success"
+            variant="filled"
+            icon={<CheckCircleIcon sx={{ height: "2rem" }} />}
+            sx={{ fontSize: "1.5rem", mb: "2rem" }}>
+            Success! Your purchase is complete.
+          </Alert>
+          <Typography variant="h4" component="p">
+            You've purchased:
+          </Typography>
+          <Grid
+            container
+            spacing="1rem"
+            sx={{ my: "1rem", justifyContent: "center" }}>
+            {Array.from(JSON.parse(paymentIntentData.metadata.cart)).map(
+              (item) => (
+                <Grid item xs={12} md={6} lg={4}>
+                  <Card sx={{ p: "1rem" }}>
+                    <Typography key={item.id}>
+                      {item.quantity} x {item.name}
+                    </Typography>
+                  </Card>
+                </Grid>
+              )
+            )}
+          </Grid>
+          <Typography variant="h4" component="p" sx={{ my: "2rem" }}>
+            What would you like to do next?
+          </Typography>
+          <Stack spacing={2} alignItems="center" justifyContent='center'>
+            <Button variant="contained" sx={{width:'fit-content'}}>Check in now</Button>
+            <Button>Manage your bookings</Button>
+          </Stack>
+        </Container>
+      )}
+
+      {/* <Typography variant="h1">Rider ID</Typography>
       <Typography>{riderId}</Typography>
       <Typography variant="h1">Payment Intent Data</Typography>
       <Typography>{JSON.stringify(paymentIntentData)}</Typography>
       <Typography variant="h1">Request Body</Typography>
-      <Typography>{requestBody}</Typography>
+      <Typography>{requestBody}</Typography> */}
       {/* <div className="booking-result__container">
         {!transactionId && (
           <>

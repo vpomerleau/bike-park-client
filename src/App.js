@@ -16,6 +16,11 @@ const theme = createTheme({
       main: "#2e845d",
     },
   },
+  components: {
+    MuiAlert:{
+      styleOverrides: { filledSuccess: { backgroundColor: "#2e845d" } },
+    },
+  },
 });
 
 export const App = () => {
