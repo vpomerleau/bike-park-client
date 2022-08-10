@@ -78,45 +78,52 @@
 <!-- Screenshots -->
 ### Screenshots
 
-<div align="center"> 
-  <img src="https://placehold.co/600x400?text=Your+Screenshot+here" alt="screenshot" />
-</div>
+<figure align="center"> 
+  <img src="./src/assets/screenshots/wbp-homepage-screenshot.png" alt="screenshot of home page" />
+  <figcaption>Woodwork Bike Park Home Page</figcaption>
+</figure>
 
+<figure align="center"> 
+  <img src="./src/assets/screenshots/wbp-purchase-page-screenshot.png" alt="screenshot of purchase page" />
+  <figcaption>Woodwork Bike Park Purchase Page showing Stripe Payment Element</figcaption>
+</figure>
 
-<!-- Dependencies -->
-## Dependencies
-
-<details>
-  <summary>Client</summary>
-  <ul>
-    <li><a href="https://reactjs.org/">React.js</a></li>
-    <li><a href="https://sass-lang.com/">Sass</a></li>
-    <li><a href="https://axios-http.com/">Axios</a></li>
-    <li><a href="https://auth0.com/">Auth0</a></li>
-    <li><a href="https://stripe.com/en-ca">Stripe</a></li>
-  </ul>
-</details>
-
-<details>
-  <summary>Server</summary>
-  <ul>
-    <li><a href="https://expressjs.com/">Express.js</a></li>
-    <li><a href="https://knexjs.org/">Knex.js</a></li>
-  </ul>
-</details>
-
-<details>
-<summary>Database</summary>
-  <ul>
-    <li><a href="https://www.mysql.com/">MySQL</a></li>
-  </ul>
-</details>
+<figure align="center"> 
+  <img src="./src/assets/screenshots/wbp-purchase-confirmation-screenshot.png" alt="screenshot of purchase confirmation page" />
+  <figcaption>Woodwork Bike Park Purchase Confirmation Page Page, showing purchased products and option to check-in</figcaption>
+</figure>
 
 <!-- Features -->
 ## Features
 
 - Authentication with Auth0
 - Payments with Stripe
+
+
+<!-- Dependencies -->
+## Tech Stack
+
+  <summary>Client</summary>
+  <ul>
+    <li><a href="https://reactjs.org/">React.js</a></li>
+    <li><a href="https://mui.com/">Material UI</a></li>
+    <li><a href="https://sass-lang.com/">Sass</a></li>
+    <li><a href="https://axios-http.com/">Axios</a></li>
+    <li><a href="https://auth0.com/">Auth0</a></li>
+    <li><a href="https://stripe.com/en-ca">Stripe</a></li>
+  </ul>
+
+  <summary>Server</summary>
+  <ul>
+    <li><a href="https://nodejs.org/en/">Node.js</a></li> 
+    <li><a href="https://expressjs.com/">Express.js</a></li>
+    <li><a href="https://knexjs.org/">Knex.js</a></li>
+  </ul>
+
+<summary>Database</summary>
+  <ul>
+    <li><a href="https://www.mysql.com/">MySQL</a></li>
+  </ul>
 
 <!-- Color Reference -->
 ## Color Reference
@@ -127,13 +134,13 @@
 | Brand Color (dark) | ![#EBA13F](https://via.placeholder.com/10/EBA13F?text=+) #EBA13F |
 | Accent Color | ![#2e845d](https://via.placeholder.com/10/2e845d?text=+) #2e845d |
 | Text Color (on dark) | ![#FFFFFF](https://via.placeholder.com/10/FFFFFF?text=+) #FFFFFF |
-| Text Color (on white) | ![#000000](https://via.placeholder.com/10/#000000?text=+) #000000 |
+| Dark Background/Text Color (on white) | ![#000000](https://via.placeholder.com/10/#000000?text=+) #000000 |
 
 
 <!-- Env Variables -->
 ## Environment Variables
 
-To run this project, you will need to add the following environment variables to your .env file
+To run this project, you will need to add the following environment variables to your .env file. See env.sample file for more details.
 
 `API_SERVER_URL`
 
@@ -161,26 +168,12 @@ This project uses Node as package manager
  npm install -g npm
 ```
 
-<!-- Installation -->
-<!-- ### Installation
+You will need accounts with Auth0 and Stripe to obtain your environment variables.
 
-Install bike-park-client with npm
+[Get an account with Auth0](https://auth0.com/signup)
 
-```bash
-  yarn install my-project
-  cd my-project
-``` -->
-   
-<!-- Running Tests -->
-<!-- ### Running Tests
+[Get an account with Stripe](https://dashboard.stripe.com/register)
 
-To run tests, run the following command
-
-```bash
-  yarn test test
-``` -->
-
-<!-- Run Locally -->
 ## Install a local copy of the project
 
 Make a top level project directory to hold the client and server-side code
@@ -201,8 +194,6 @@ Clone the client and server into the top level folder (two new folders will be c
 ```
 
 ## Client setup
-
-[See Server-side readme](https://github.com/vpomerleau/bike-park-server/blob/develop/README.md) for detailed server installation instructions.
 
 Go to the client directory
 
@@ -225,24 +216,9 @@ Run the client-side
 ```bash
   npm start
 ```
+## Server setup
+[See Server-side readme](https://github.com/vpomerleau/bike-park-server/blob/develop/README.md) for detailed server installation instructions.
 
-
-<!-- Deployment -->
-<!-- ### Deployment
-
-To deploy this project run
-
-```bash
-  yarn deploy
-``` -->
-
-
-<!-- Usage -->
-<!-- ## Usage
-
-Use this space to tell a little more about your project and how it can be used. Show additional screenshots, code samples, demos or link to other resources. -->
-
-<!-- Roadmap -->
 # Roadmap
 
 * [x] Proof of concept homepage
@@ -252,18 +228,6 @@ Use this space to tell a little more about your project and how it can be used. 
 * [ ] User controlled booking management (incl. transferring tickets to other riders)
 * [ ] Unit testing
 * [ ] Phases 2 to 1,000 to build a full-featured bike park management system
-
-<!-- FAQ -->
-<!-- ## FAQ
-
-- Question 1
-
-  + Answer 1
-
-- Question 2
-
-  + Answer 2 -->
-
 
 <!-- License -->
 # License
