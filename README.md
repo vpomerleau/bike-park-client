@@ -27,10 +27,6 @@
 </p>
 
 <h4>
-    <!-- <a href="https://github.com/Louis3797/awesome-readme-template/">View Demo</a>
-  <span> · </span>
-    <a href="https://github.com/Louis3797/awesome-readme-template">Documentation</a>
-  <span> · </span> -->
     <a href="https://github.com/vpomerleau/bike-park-client/issues/">Report Bug</a>
   <span> · </span>
     <a href="https://github.com/vpomerleau/bike-park-client/issues/">Request Feature</a>
@@ -138,7 +134,7 @@
 
 
 <!-- Env Variables -->
-## Environment Variables
+## Environment Variables (Client)
 
 To run this project, you will need to add the following environment variables to your .env file. See env.sample file for more details.
 
@@ -168,7 +164,7 @@ This project uses Node as package manager
  npm install -g npm
 ```
 
-You will need accounts with Auth0 and Stripe to obtain your environment variables.
+You will need accounts with Auth0 and Stripe to obtain your environment variables. Make sure that values provided in the Auth0/Stripe dashboards perfectly matches the values entered in your environment variables, or the app might not load (will return errors).
 
 [Get an account with Auth0](https://auth0.com/signup)
 
