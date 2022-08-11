@@ -88,11 +88,6 @@ export const BookingForm = (props) => {
       .catch((err) => console.log(err));
   };
 
-  // TODO cart reset
-  // const handleCartReset = (e) => {
-  //   e.preventDefault();
-  // };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     createPaymentIntent();
@@ -143,9 +138,6 @@ export const BookingForm = (props) => {
               })}
             </Typography>
             <div className="booking-form__actions">
-              {/* <Button variant="outlined" onClick={handleCartReset}>
-            Reset Cart
-          </Button> */}
               <Button
                 type="submit"
                 variant="contained"
