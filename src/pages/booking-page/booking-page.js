@@ -33,6 +33,10 @@ export const BookingPage = () => {
     appearance,
   };
 
+  if (!stripePromise){
+    return (<h1>Loading...</h1>)
+  }
+
   return (
     <PageLayout>
       <div className="booking-page">
