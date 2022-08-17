@@ -99,27 +99,28 @@ export const BookingForm = (props) => {
         Pass options
       </Typography>
       <form className="booking-form" onSubmit={handleSubmit}>
-        <Grid container spacing={2}>
-          {products.map((product) => {
-            return (
-              <Product
-                key={product.id}
-                item={product}
-                updateCart={updateCart}
-                cart={props.cart}
-              />
-            );
-          })}
-        </Grid>
+        {!products && <p>Fetching products...</p>}
+        {products && (
+          <Grid container spacing={2}>
+            {products.map((product) => {
+              return (
+                <Product
+                  key={product.id}
+                  item={product}
+                  updateCart={updateCart}
+                  cart={props.cart}
+                />
+              );
+            })}
+          </Grid>
+        )}
         <Divider sx={{ my: "1rem" }} />
         <Grid container>
           <Grid item xs={12} md={6} lg={8} sx={{ alignText: "left" }}>
             <Typography variant="h6" component="p">
               In your cart:
             </Typography>
-            {props.cart.length === 0 && (
-              <Typography>Nothing yet!</Typography>
-            )}
+            {props.cart.length === 0 && <Typography>Nothing yet!</Typography>}
             {props.cart &&
               props.cart.map((item) => {
                 return (
